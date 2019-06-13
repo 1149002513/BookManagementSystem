@@ -25,6 +25,7 @@ public class BookController {
         account = userServerImpl.getAccount(account);
         if (account!=null){
             System.out.println(account);
+            model.addAttribute("time","10:30");
             return "success";
         }
         else {
