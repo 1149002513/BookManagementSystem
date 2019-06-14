@@ -14,10 +14,10 @@ public class BookController {
     @Autowired
     UserServerImpl userServerImpl;
 
-    @RequestMapping(value = {"","login"})
+    @RequestMapping(value = {"","main"})
     public String hello(Account account, Model model){
         model.addAttribute("account",account);
-        return "login";
+        return "main";
     }
 
     @RequestMapping(value = "logining")
