@@ -38,6 +38,6 @@ public class BookController {
     @RequestMapping("regist")
     public String regist(Account account,Model model){
         model.addAttribute("account",account);
-        return "regist";
+        return "login";
     }
 }

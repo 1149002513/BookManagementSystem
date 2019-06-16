@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: sunqi
@@ -130,6 +131,42 @@
 </head>
 <body>
 
+
+<%--登录模态框--%>
+<div class="box-tools pull-right" style="opacity: 0.5;">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        登录
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                </div>
+            <div class="modal-body">
+                <form:form modelAttribute="account">
+                    <form:input path="id" class="form-control width-120" placeholder="输入账号"  />
+                    <br><br>
+                    <form:input path="password" class="form-control width-120" placeholder="输入密码"  />
+                </form:form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    登录
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</div>
+
+
+
+
 <div class="pulse1"></div>
 <div class="searchicon">
     <center>
@@ -151,7 +188,7 @@
                 <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;">好书推荐</a>
             </li>
             <li class="nav-item active" style="margin-right: 10px;">
-                <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;">我的图书馆</a>
+                <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
             </li>
 
             <li class="nav-item" style="margin-right: 10px;">
@@ -177,7 +214,7 @@
 
         <div style="margin-top: 5%;">
             <div id="search" style="float: left;width: 30%;height: 9%;margin-top: -3px;">
-                <input type="text" class="form-control" id="search1" placeholder="全面搜索馆藏内容" style="width: 100%;height: 100%;opacity: 0.8;">
+                <input type="text" class="form-control" id="search1"  style="width: 100%;height: 100%;opacity: 0.8;">
             </div>
             <button type="submit" class="btn btn-primary" style="height: 7%;width: 6%;margin-left: 2%;">搜索</button>
         </div>

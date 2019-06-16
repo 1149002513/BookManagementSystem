@@ -4,7 +4,7 @@
 <mapper namespace="Mapper.UserMapper">
 
     <!--根据用户名查询用户-->
-    <select id="getAccount" parameterType="account" resultType="Account">
+    <select id="getAccount" parameterType="Account" resultType="Account">
         select * from account where name=#{name} and password=#{password}
     </select>
 
