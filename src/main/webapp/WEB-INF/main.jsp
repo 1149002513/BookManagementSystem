@@ -133,7 +133,7 @@
 
 
 <%--登录模态框--%>
-<div class="box-tools pull-right" style="opacity: 0.5;">
+<div class="box-tools pull-right">
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -146,18 +146,19 @@
                     </button>
                 </div>
             <div class="modal-body">
-                <form:form modelAttribute="account">
+                <form:form modelAttribute="yonghu" action="logining" target="_blank">
                     <form:input path="id" class="form-control width-120" placeholder="输入账号"  />
                     <br><br>
                     <form:input path="password" class="form-control width-120" placeholder="输入密码"  />
-                </form:form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                     登录
                 </button>
+                </form:form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

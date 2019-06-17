@@ -1,11 +1,11 @@
 package Mapper;
 
-import entity.Account;
+import entity.Yonghu;
 
 public interface UserMapper {
 
-    public Account getAccount(Account account);
+    public Yonghu getAccount(Yonghu yonghu);
 
-    public void addAccount(Account account);
+    public void addAccount(Yonghu yonghu);
 
 }

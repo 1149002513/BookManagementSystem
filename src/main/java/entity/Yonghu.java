@@ -1,6 +1,6 @@
 package entity;
 
-public class Account {
+public class Yonghu {
 
     private String id;
     private String name;
@@ -9,10 +9,10 @@ public class Account {
     private Integer book_number;
     private Integer limit_y;
 
-    public Account() {
+    public Yonghu() {
     }
 
-    public Account(String id, String name, String password, String avatar, Integer book_number, Integer limit_y) {
+    public Yonghu(String id, String name, String password, String avatar, Integer book_number, Integer limit_y) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -71,7 +71,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "entity.Account{" +
+        return "entity.Yonghu{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +

@@ -1,7 +1,7 @@
 package web;
 
 
-import entity.Account;
+import entity.Yonghu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,16 +15,16 @@ public class BookController {
     UserServerImpl userServerImpl;
 
     @RequestMapping(value = {"","main"})
-    public String hello(Account account, Model model){
-        model.addAttribute("account",account);
+    public String hello(Yonghu yonghu, Model model){
+        model.addAttribute("account", yonghu);
         return "main";
     }
 
     @RequestMapping(value = "logining")
-    public String logining(Account account,Model model){
-        account = userServerImpl.getAccount(account);
-        if (account!=null){
-            System.out.println(account);
+    public String logining(Yonghu yonghu, Model model){
+        yonghu = userServerImpl.getYonghu(yonghu);
+        if (yonghu !=null){
+            System.out.println(yonghu);
             model.addAttribute("time","10:30");
             return "success";
         }
@@ -36,8 +36,8 @@ public class BookController {
     }
 
     @RequestMapping("regist")
-    public String regist(Account account,Model model){
-        model.addAttribute("account",account);
+    public String regist(Yonghu yonghu, Model model){
+        model.addAttribute("account", yonghu);
         return "login";
     }
 }

@@ -27,7 +27,7 @@
 <div style="width: 50%; height: 60%; margin-left: 25%;margin-top: 10%; border: rgba(96,172,120,0.96) 4px solid;border-radius: 10px;">
     <div style="width: 80%;height: 100%; margin-left: 10%;margin-top: 10%;">
         <h2>欢迎使用图书管理系统</h2>
-        <form:form id="myform" modelAttribute="account" action="logining">
+        <form:form id="myform" modelAttribute="yonghu" action="logining">
             <div class="form-group">
                 <label for="name">账号</label>
                 <form:input path="name" type="text" class="form-control" id="name" placeholder="请输入账号" />

@@ -1,7 +1,7 @@
 package server.impl;
 
 import Mapper.UserMapper;
-import entity.Account;
+import entity.Yonghu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import server.UserServer;
@@ -15,15 +15,15 @@ public class UserServerImpl implements UserServer {
     UserMapper userMapper;
 
     @Override
-    public Account getAccount(Account account) {
-        Account account1 = userMapper.getAccount(account);
-        return account1;
+    public Yonghu getYonghu(Yonghu yonghu) {
+        Yonghu yonghu1 = userMapper.getAccount(yonghu);
+        return yonghu1;
     }
 
     @Override
-    public void addAccount(Account account) {
+    public void addYonghu(Yonghu yonghu) {
         String id = UUID.randomUUID().toString().replace("-","");
-        account.setId(id);
-        userMapper.addAccount(account);
+        yonghu.setId(id);
+        userMapper.addAccount(yonghu);
     }
 }

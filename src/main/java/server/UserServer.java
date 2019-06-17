@@ -1,14 +1,11 @@
 package server;
 
-import Mapper.UserMapper;
-import entity.Account;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import entity.Yonghu;
 
 
 public interface UserServer {
 
-    public Account getAccount(Account account);
+    public Yonghu getYonghu(Yonghu yonghu);
 
-    public void addAccount(Account account);
+    public void addYonghu(Yonghu yonghu);
 }
