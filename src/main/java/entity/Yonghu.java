@@ -5,20 +5,22 @@ public class Yonghu {
     private String id;
     private String name;
     private String password;
-    private String avatar;
-    private Integer book_number;
-    private Integer limit_y;
+    private String avatar="/avatar/example.jpg";
+    private Integer book_number=0;
+    private Integer limit_y=0;
+    private Integer active=0;
 
     public Yonghu() {
     }
 
-    public Yonghu(String id, String name, String password, String avatar, Integer book_number, Integer limit_y) {
+    public Yonghu(String id, String name, String password, String avatar, Integer book_number, Integer limit_y, Integer active) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.avatar = avatar;
         this.book_number = book_number;
         this.limit_y = limit_y;
+        this.active = active;
     }
 
     public String getId() {
@@ -69,15 +71,24 @@ public class Yonghu {
         this.limit_y = limit_y;
     }
 
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
-        return "entity.Yonghu{" +
+        return "Yonghu{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", book_number=" + book_number +
                 ", limit_y=" + limit_y +
+                ", active=" + active +
                 '}';
     }
 }

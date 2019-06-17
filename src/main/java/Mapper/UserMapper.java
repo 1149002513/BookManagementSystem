@@ -4,8 +4,8 @@ import entity.Yonghu;
 
 public interface UserMapper {
 
-    public Yonghu getAccount(Yonghu yonghu);
+    public Yonghu getYonghu(Yonghu yonghu);
 
-    public void addAccount(Yonghu yonghu);
+    public void addYonghu(Yonghu yonghu);
 
 }

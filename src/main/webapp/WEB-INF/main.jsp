@@ -131,6 +131,39 @@
 </head>
 <body>
 
+<%--注册模态框--%>
+<div class="box-tools pull-right">
+    <div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="resModalLabel">
+                        账号申请
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form:form modelAttribute="yonghu" action="regist" target="_blank">
+                    <form:input path="name" class="form-control width-120" placeholder="输入账号"  />
+                    <br><br>
+                    <form:input path="password" class="form-control width-120" placeholder="输入密码"  />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        申请
+                    </button>
+                    </form:form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+
 
 <%--登录模态框--%>
 <div class="box-tools pull-right">
@@ -147,12 +180,13 @@
                 </div>
             <div class="modal-body">
                 <form:form modelAttribute="yonghu" action="logining" target="_blank">
-                    <form:input path="id" class="form-control width-120" placeholder="输入账号"  />
+                    <form:input path="name" class="form-control width-120" placeholder="输入账号"  />
                     <br><br>
                     <form:input path="password" class="form-control width-120" placeholder="输入密码"  />
 
             </div>
             <div class="modal-footer">
+                <a class="nav-link" href="#" style="color: #a8bbff;font-size: 15px;" data-toggle="modal" data-target="#resModal" data-dismiss="modal">没有账号？立即申请</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
                 <button type="submit" class="btn btn-primary">

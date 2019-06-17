@@ -10,7 +10,7 @@
 
     <!--增加用户-->
     <insert id="addYonghu" parameterType="Yonghu">
-        insert into yonghu(id,name,password,avatar,book_number,limit_y) values (#{id},#{name },#{password},#{avatar},#{book_number},#{limit_y})
+        insert into yonghu(id,name,password,avatar,book_number,limit_y,active) values (#{id},#{name},#{password},#{avatar},#{book_number},#{limit_y},#{active})
     </insert>
 
 </mapper>

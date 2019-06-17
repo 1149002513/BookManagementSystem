@@ -16,7 +16,7 @@ public class UserServerImpl implements UserServer {
 
     @Override
     public Yonghu getYonghu(Yonghu yonghu) {
-        Yonghu yonghu1 = userMapper.getAccount(yonghu);
+        Yonghu yonghu1 = userMapper.getYonghu(yonghu);
         return yonghu1;
     }
 
@@ -24,6 +24,6 @@ public class UserServerImpl implements UserServer {
     public void addYonghu(Yonghu yonghu) {
         String id = UUID.randomUUID().toString().replace("-","");
         yonghu.setId(id);
-        userMapper.addAccount(yonghu);
+        userMapper.addYonghu(yonghu);
     }
 }

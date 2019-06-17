@@ -26,7 +26,7 @@ public class BookController {
         if (yonghu !=null){
             System.out.println(yonghu);
             model.addAttribute("time","10:30");
-            return "success";
+            return "mymain";
         }
         else {
             System.out.println("账号或密码错误！");
@@ -37,7 +37,9 @@ public class BookController {
 
     @RequestMapping("regist")
     public String regist(Yonghu yonghu, Model model){
-        model.addAttribute("account", yonghu);
-        return "login";
+        model.addAttribute("yonghu", yonghu);
+//        System.out.println(yonghu);
+//        userServerImpl.addYonghu(yonghu);
+        return "ressuccess";
     }
 }
