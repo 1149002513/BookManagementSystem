@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.ArrayList;
+
 public class Yonghu {
 
     private String id;
@@ -9,11 +11,12 @@ public class Yonghu {
     private Integer book_number=0;
     private Integer limit_y=0;
     private Integer active=0;
+    private ArrayList<Book> books;
 
     public Yonghu() {
     }
 
-    public Yonghu(String id, String name, String password, String avatar, Integer book_number, Integer limit_y, Integer active) {
+    public Yonghu(String id, String name, String password, String avatar, Integer book_number, Integer limit_y, Integer active, ArrayList<Book> books) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -21,6 +24,15 @@ public class Yonghu {
         this.book_number = book_number;
         this.limit_y = limit_y;
         this.active = active;
+        this.books = books;
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
     }
 
     public String getId() {
@@ -89,6 +101,7 @@ public class Yonghu {
                 ", book_number=" + book_number +
                 ", limit_y=" + limit_y +
                 ", active=" + active +
+                ", books=" + books +
                 '}';
     }
 }

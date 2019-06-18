@@ -13,4 +13,13 @@
         insert into yonghu(id,name,password,avatar,book_number,limit_y,active) values (#{id},#{name},#{password},#{avatar},#{book_number},#{limit_y},#{active})
     </insert>
 
+    <!--查询用户借了哪些书-->
+    <select id="getBooks" parameterType="Yonghu" resultMap="">
+
+    </select>
+
+    <resultMap id="Books" type="Yonghu">
+        <id property="id" column=""></id>
+    </resultMap>
+
 </mapper>

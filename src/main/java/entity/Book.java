@@ -8,17 +8,19 @@ public class Book {
     private Integer lend;
     private Double price;
     private Integer count;
+    private String uid; //用户id
 
     public Book() {
     }
 
-    public Book(String id, String name, String cover, Integer lend, Double price, Integer count) {
+    public Book(String id, String name, String cover, Integer lend, Double price, Integer count, String uid) {
         this.id = id;
         this.name = name;
         this.cover = cover;
         this.lend = lend;
         this.price = price;
         this.count = count;
+        this.uid = uid;
     }
 
     public String getId() {
@@ -71,13 +73,14 @@ public class Book {
 
     @Override
     public String toString() {
-        return "entity.Book{" +
+        return "Book{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", cover='" + cover + '\'' +
                 ", lend=" + lend +
                 ", price=" + price +
                 ", count=" + count +
+                ", uid='" + uid + '\'' +
                 '}';
     }
 }

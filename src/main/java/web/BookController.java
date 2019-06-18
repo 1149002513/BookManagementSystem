@@ -10,7 +10,6 @@ import server.impl.UserServerImpl;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @Controller
 public class BookController {
