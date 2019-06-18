@@ -3,4 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Mapper.RecordMapper">
 
+    <select id="getRecord" parameterType="String" resultMap="recordBook">
+        select * from borrowingrecord where account_id=#{id}
+    </select>
+
+    <resultMap id="recordBook" type="Borrowingrecord">
+        <id column="id" property="id" />
+        <result column="lend_time" property="lend_time" />
+        <result column="re_time" property="re_time" />
+        <association property="book" column="book_id" select="Mapper.BookMapper.getBookById">
+            <id column="id" property="id" />
+            <result column="name" property="name" />
+            <result column="cover" property="cover" />
+            <result column="price" property="price" />
+            <result column="count" property="count" />
+            <result column="author" property="author" />
+            <result column="localtion" property="localtion" />
+        </association>
+    </resultMap>
 </mapper>

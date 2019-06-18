@@ -14,12 +14,33 @@
     </insert>
 
     <!--查询用户借了哪些书-->
-    <select id="getBooks" parameterType="Yonghu" resultMap="">
-
+    <select id="getBooks" parameterType="Yonghu" resultMap="Books">
+        select * from yonghu where id=#{id}
     </select>
 
     <resultMap id="Books" type="Yonghu">
-        <id property="id" column=""></id>
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="password" column="password" />
+        <result property="avatar" column="avatar" />
+        <result property="book_number" column="book_number" />
+        <result property="limit_y" column="limit_y" />
+        <result property="active" column="active"/>
+        <collection property="books" ofType="Book" select="getBooks2" column="id">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="cover" column="cover" />
+            <result property="price" column="price" />
+            <result property="count" column="count" />
+            <result property="author" column="author" />
+            <result property="location" column="localtion" />
+        </collection>
+
     </resultMap>
+
+
+    <select id="getBooks2" resultType="Book" parameterType="string">
+        select * from book where uid=#{id}
+    </select>
 
 </mapper>

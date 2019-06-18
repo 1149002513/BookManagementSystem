@@ -1,6 +1,7 @@
 package web;
 
 
+import entity.Borrowingrecord;
 import entity.Yonghu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import server.impl.UserServerImpl;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Controller
 public class BookController {
@@ -27,8 +29,15 @@ public class BookController {
     public String logining(Yonghu yonghu, Model model, HttpServletResponse response) throws IOException {
         yonghu = userServerImpl.getYonghu(yonghu);
         if (yonghu !=null){
+            yonghu = userServerImpl.getBooks(yonghu);
+            model.addAttribute("yonghu",yonghu);
+            ArrayList<Borrowingrecord> records = userServerImpl.getRecord(yonghu.getId());
+            model.addAttribute("records",records);
             System.out.println(yonghu);
-            model.addAttribute("time","10:30");
+            System.out.println(records.size());
+            for (Borrowingrecord record:records){
+                System.out.println(record);
+            }
             return "mymain";
         }
         else {

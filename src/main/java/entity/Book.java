@@ -5,7 +5,7 @@ public class Book {
     private String id;
     private String name;
     private String cover;
-    private Integer lend;
+    private String author;
     private Double price;
     private Integer count;
     private String uid; //用户id
@@ -13,13 +13,29 @@ public class Book {
     public Book() {
     }
 
-    public Book(String id, String name, String cover, Integer lend, Double price, Integer count, String uid) {
+    public Book(String id, String name, String cover, String author, Double price, Integer count, String uid) {
         this.id = id;
         this.name = name;
         this.cover = cover;
-        this.lend = lend;
+        this.author = author;
         this.price = price;
         this.count = count;
+        this.uid = uid;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -47,14 +63,6 @@ public class Book {
         this.cover = cover;
     }
 
-    public Integer getLend() {
-        return lend;
-    }
-
-    public void setLend(Integer lend) {
-        this.lend = lend;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -77,7 +85,7 @@ public class Book {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", cover='" + cover + '\'' +
-                ", lend=" + lend +
+                ", author='" + author + '\'' +
                 ", price=" + price +
                 ", count=" + count +
                 ", uid='" + uid + '\'' +

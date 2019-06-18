@@ -8,4 +8,6 @@ public interface UserMapper {
 
     public void addYonghu(Yonghu yonghu);
 
+    public Yonghu getBooks(Yonghu yonghu);
+
 }

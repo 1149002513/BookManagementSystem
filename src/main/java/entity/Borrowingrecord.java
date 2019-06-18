@@ -8,17 +8,28 @@ public class Borrowingrecord {
     private String book_id;
     private String account_id;
     private Timestamp lend_time;
-    private Integer re;
+    private Timestamp re_time;
+
+    private Book book;
 
     public Borrowingrecord() {
     }
 
-    public Borrowingrecord(String id, String book_id, String account_id, Timestamp lend_time, Integer re) {
+    public Borrowingrecord(String id, String book_id, String account_id, Timestamp lend_time, Timestamp re_time, Book book) {
         this.id = id;
         this.book_id = book_id;
         this.account_id = account_id;
         this.lend_time = lend_time;
-        this.re = re;
+        this.re_time = re_time;
+        this.book = book;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public String getId() {
@@ -53,22 +64,23 @@ public class Borrowingrecord {
         this.lend_time = lend_time;
     }
 
-    public Integer getRe() {
-        return re;
+    public Timestamp getRe_time() {
+        return re_time;
     }
 
-    public void setRe(Integer re) {
-        this.re = re;
+    public void setRe_time(Timestamp re_time) {
+        this.re_time = re_time;
     }
 
     @Override
     public String toString() {
-        return "entity.Borrowingrecord{" +
+        return "Borrowingrecord{" +
                 "id='" + id + '\'' +
                 ", book_id='" + book_id + '\'' +
                 ", account_id='" + account_id + '\'' +
                 ", lend_time=" + lend_time +
-                ", re=" + re +
+                ", re_time=" + re_time +
+                ", book=" + book +
                 '}';
     }
 }

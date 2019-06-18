@@ -20,4 +20,9 @@
         update book set lend = 0 where id = #{id}
     </update>
 
+    <!--按照书的id查询书-->
+    <select id="getBookById" parameterType="string" resultType="Book">
+        select * from book where id=#{id}
+    </select>
+
 </mapper>

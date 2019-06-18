@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: sunqi
@@ -5,6 +6,7 @@
   Time: 上午11:40
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -57,13 +59,82 @@
 </nav>
 
 <div class="row">
-    <div class="col-8">
-        <h3>已借图书:${yonghu.number}</h3>
+    <div class="col-7">
+        <p>欢迎 ${yonghu.name}:</p>
+        <h3>已借图书:${yonghu.book_number}</h3>
+        <div id="app-2">
+
+            <c:choose>
+                <c:when test="${ !empty yonghu.books}">
+                    <c:forEach items="${yonghu.books}" var="book">
+                        <div class="text-center" style="margin-right: 10px;float: left;border: rgba(127,129,123,0.73) 2px solid; border-radius: 10px;">
+                            <img src="${book.cover}" alt="${book.name}的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
+                            <p>书名：${book.name}</p>
+                            <p>作者：${book.author}</p>
+                            <p>价格：${book.price}</p>
+                            <p>被借次数：${book.count}</p>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <p>你现在暂时没有借书哦！快来一起读书吧！</p>
+                    <img src="/ht/xitongpic/mymianbook.jpg">
+                </c:otherwise>
+            </c:choose>
+
+        </div>
     </div>
-    <div class="col-4"></div>
+    <div class="col-5">
+        <h3>借阅记录：</h3>
+
+        <c:choose>
+            <c:when test="${ !empty records}">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">序号</th>
+                        <th scope="col">书名</th>
+                        <th scope="col">作者</th>
+                        <th scope="col">借书日期</th>
+                        <th scope="col">还书日期</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${records}" var="record" varStatus="i">
+                            <tr>
+                                <th scope="row">${i.index}</th>
+                                <td>${record.book.name}</td>
+                                <td>${record.book.author}</td>
+                                <td>${record.lend_time}</td>
+                                <c:choose>
+                                    <c:when test="${!empty record.re_time}">
+                                        <td>${record.re_time}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>未归还</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                        </c:forEach>
+
+                    </tbody>
+                </table>
+            </c:when>
+
+            <c:otherwise>
+                <p>暂时还没有借阅记录哦！</p>
+                <hr style="border: rgba(127,129,123,0.73) 2px solid;">
+                <p>快开始你的读书之旅吧！</p>
+                <img src="/ht/xitongpic/mymainbook2.jpg" style="width: 80%;height: 40%;">
+
+            </c:otherwise>
+        </c:choose>
+
+    </div>
 </div>
 
 
 
 </body>
+
 </html>
