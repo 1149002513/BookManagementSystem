@@ -8,6 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import server.impl.UserServerImpl;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 @Controller
 public class BookController {
 
@@ -21,7 +25,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "logining")
-    public String logining(Yonghu yonghu, Model model){
+    public String logining(Yonghu yonghu, Model model, HttpServletResponse response) throws IOException {
         yonghu = userServerImpl.getYonghu(yonghu);
         if (yonghu !=null){
             System.out.println(yonghu);
@@ -38,8 +42,8 @@ public class BookController {
     @RequestMapping("regist")
     public String regist(Yonghu yonghu, Model model){
         model.addAttribute("yonghu", yonghu);
-//        System.out.println(yonghu);
-//        userServerImpl.addYonghu(yonghu);
+        System.out.println(yonghu);
+        userServerImpl.addYonghu(yonghu);
         return "ressuccess";
     }
 }

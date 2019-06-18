@@ -223,7 +223,7 @@
                 <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;">好书推荐</a>
             </li>
             <li class="nav-item active" style="margin-right: 10px;">
-                <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
+                <a class="nav-link" href北京大学图书馆="#" style="color: #ffffff;font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
             </li>
 
             <li class="nav-item" style="margin-right: 10px;">
