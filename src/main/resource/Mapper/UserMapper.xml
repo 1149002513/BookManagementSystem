@@ -5,7 +5,7 @@
 
     <!--根据用户名查询用户-->
     <select id="getYonghu" parameterType="Yonghu" resultType="Yonghu">
-        select * from yonghu where name=#{name} and password=#{password}
+        select * from yonghu where name=#{name} and password=#{password} and active=#{active}
     </select>
 
     <!--增加用户-->
