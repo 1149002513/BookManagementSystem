@@ -245,7 +245,7 @@
     <div style="float: left; margin-left: 26%;margin-right: 4%; width: 70px;height: 70px;">
     </div>
 
-    <form>
+    <form action="/search">
 
         <div style="margin-top: 5%;">
             <div id="search" style="float: left;width: 30%;height: 9%;margin-top: -3px;">

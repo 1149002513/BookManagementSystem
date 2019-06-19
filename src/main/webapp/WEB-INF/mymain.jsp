@@ -13,7 +13,6 @@
     <title>我的图书馆</title>
     <script src="/ht/jquery/jquery-3.3.1.js"></script>
     <script src="/ht/bootstrap/js/bootstrap.js"></script>
-    <script src="/ht/vue/vue.js"></script>
     <link rel='stylesheet' href="/ht/bootstrap/css/bootstrap.css">
     <link rel='stylesheet' href="/ht/bootstrap/css//bootstrap-grid.css">
     <link rel='stylesheet' href="/ht/bootstrap/css//bootstrap-reboot.css">

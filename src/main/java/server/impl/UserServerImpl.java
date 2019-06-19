@@ -1,7 +1,9 @@
 package server.impl;
 
+import Mapper.BookMapper;
 import Mapper.RecordMapper;
 import Mapper.UserMapper;
+import entity.Book;
 import entity.Borrowingrecord;
 import entity.Yonghu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class UserServerImpl implements UserServer {
 
     @Autowired
     RecordMapper recordMapper;
+
+    @Autowired
+    BookMapper bookMapper;
 
 
     @Override
@@ -46,5 +51,17 @@ public class UserServerImpl implements UserServer {
         ArrayList<Borrowingrecord> records = recordMapper.getRecord(id);
 
         return records;
+    }
+
+    @Override
+    public ArrayList<Book> getAll() {
+        ArrayList<Book> books = bookMapper.getAll();
+        return books;
+    }
+
+    @Override
+    public ArrayList<Book> searchAll(String search) {
+        ArrayList<Book> books = bookMapper.searchAll(search);
+        return books;
     }
 }

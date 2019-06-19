@@ -24,5 +24,15 @@
     <select id="getBookById" parameterType="string" resultType="Book">
         select * from book where id=#{id}
     </select>
+    
+    <!--查询所有书籍-->
+    <select id="getAll" resultType="Book">
+        select * from book;
+    </select>
+
+    <!--全字段模糊搜索-->
+    <select id="searchAll" resultType="Book">
+        select * from book where id=#{search} or name=#{search} or author=#{search} or location=#{search}
+    </select>
 
 </mapper>

@@ -1,12 +1,14 @@
 package web;
 
 
+import entity.Book;
 import entity.Borrowingrecord;
 import entity.Yonghu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import server.impl.UserServerImpl;
 
 import javax.servlet.http.HttpServletResponse;
@@ -53,5 +55,30 @@ public class BookController {
         System.out.println(yonghu);
         userServerImpl.addYonghu(yonghu);
         return "ressuccess";
+    }
+
+    @RequestMapping("search")
+    public String search(String search,Model model){
+        ArrayList<Book> books = new ArrayList<>();
+        if (search.equals("") || search==null){
+            books = userServerImpl.getAll();
+        }else {
+            books = userServerImpl.searchAll(search);
+        }
+        model.addAttribute("books",books);
+        return "search";
+    }
+
+    @RequestMapping("search2")
+    @ResponseBody
+    public String search2(String search,Model model){
+        ArrayList<Book> books = new ArrayList<>();
+        if (search.equals("") || search==null){
+            books = userServerImpl.getAll();
+        }else {
+            books = userServerImpl.searchAll(search);
+        }
+        model.addAttribute("books",books);
+        return "search";
     }
 }

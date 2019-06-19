@@ -1,5 +1,6 @@
 package server;
 
+import entity.Book;
 import entity.Borrowingrecord;
 import entity.Yonghu;
 
@@ -15,5 +16,9 @@ public interface UserServer {
     public Yonghu getBooks(Yonghu yonghu);
 
     public ArrayList<Borrowingrecord> getRecord(String id);
+
+    public ArrayList<Book> getAll();
+
+    public ArrayList<Book> searchAll(String search);
 
 }
