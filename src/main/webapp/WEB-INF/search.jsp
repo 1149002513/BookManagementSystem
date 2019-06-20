@@ -16,6 +16,9 @@
     <link rel='stylesheet' href="/ht/bootstrap/css//bootstrap-grid.css">
     <link rel='stylesheet' href="/ht/bootstrap/css//bootstrap-reboot.css">
 
+    <link rel="stylesheet" href="/ht/page/paging.css">
+
+
     <style type="text/css">
         .bookcontent{
             border: rgba(127,129,123,0.73) 2px solid;
@@ -76,7 +79,7 @@
             <button type="submit" class="btn btn-primary" style="height: 4%;width: 6%;margin-left: 2%;">搜索</button>
         </div>
 
-    <div id="books" class="bookcontent" style="height: auto;">
+    <div id="books"  class="bookcontent" style="height: auto;">
         <div v-for="book in showbooks" class="book">
             <div>
                 <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
@@ -102,15 +105,11 @@
     </div>
 
     <div style="width: 100%;height: 2%;"></div>
+    <div class="pagger-box pagger" id="box" style="margin-left: 25%;"></div>
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="/ht/page/paging.js"></script>
 
-   <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="margin-left: 40%;">
-       <div class="btn-group mr-2" role="group" aria-label="First group">
-           <button type="button" class="btn btn-secondary">1</button>
-           <button type="button" class="btn btn-secondary">2</button>
-           <button type="button" class="btn btn-secondary">3</button>
-           <button type="button" class="btn btn-secondary">4</button>
-       </div>
-   </div>
+
 
 </div>
 
@@ -121,7 +120,7 @@
         el:'#books',
         data:{
             books:${books},
-            pageSize:3,
+            pageSize:2,
             totlePage:0,
             nowPage:1
         },
@@ -131,7 +130,7 @@
             if(_this.books.length%_this.pageSize != 0){
                 _this.totlePage = parseInt(_this.books.length/_this.pageSize)+1;
             }else {
-                _this.totlePage = parseInt(_this.books.length/_this.pageSize)
+                _this.totlePage = parseInt(_this.books.length/_this.pageSize);
             }
 
         },
@@ -181,6 +180,20 @@
                     }
                 })
             }
+        }
+    })
+</script>
+
+<script>
+    var setTotalCount = bookcontent.books.length;
+    $('#box').paging({
+        initPageNo: 1, // 初始页码
+        totalPages: bookcontent.totlePage, //总页数
+        totalCount: '合计' + setTotalCount + '条数据', // 条目总数
+        slideSpeed: 600, // 缓动速度。单位毫秒
+        jump: true, //是否支持跳转
+        callback: function(page) { // 回调函数
+            console.log(page);
         }
     })
 </script>
