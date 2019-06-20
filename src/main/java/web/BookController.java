@@ -60,25 +60,28 @@ public class BookController {
     @RequestMapping("search")
     public String search(String search,Model model){
         ArrayList<Book> books = new ArrayList<>();
-        if (search.equals("") || search==null){
+        if (search==null){
             books = userServerImpl.getAll();
         }else {
             books = userServerImpl.searchAll(search);
         }
         model.addAttribute("books",books);
+        System.out.println(books.size());
         return "search";
     }
 
     @RequestMapping("search2")
     @ResponseBody
-    public String search2(String search,Model model){
+    public ArrayList<Book> search2(String search,Model model){
         ArrayList<Book> books = new ArrayList<>();
-        if (search.equals("") || search==null){
+        if ( search==null){
             books = userServerImpl.getAll();
         }else {
             books = userServerImpl.searchAll(search);
         }
-        model.addAttribute("books",books);
-        return "search";
+
+        System.out.println(books.size());
+
+        return books;
     }
 }
