@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
   User: sunqi
@@ -35,10 +37,105 @@
             border: rgba(216,221,216,0.73) 1px dotted;
             border-radius: 10px;
         }
+        #warn{
+            display: none;
+            position: absolute;
+            left: 30%;
+            top: 40%;
+            width: 200px;
+            height: 50px;
+            text-align: center;
+        }
+        #success{
+            display: none;
+            position: absolute;
+            left: 30%;
+            top: 40%;
+            width: 200px;
+            height: 50px;
+            text-align: center;
+        }
     </style>
 
 </head>
 <body>
+
+<div id="success" class="alert alert-success" role="alert">
+    预约成功！
+</div>
+
+<div id="warn" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>请先登录！</strong>
+</div>
+
+
+<%--注册模态框--%>
+<div class="box-tools pull-right">
+    <div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="resModalLabel">
+                        账号申请
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form:form modelAttribute="yonghu" action="regist" target="_blank">
+                    <form:input path="name" class="form-control width-120" placeholder="输入账号"  />
+                    <br><br>
+                    <form:input path="password" class="form-control width-120" placeholder="输入密码"  />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        申请
+                    </button>
+                    </form:form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+
+
+<%--登录模态框--%>
+<div class="box-tools pull-right">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        登录
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form:form modelAttribute="yonghu" action="logining">
+                    <form:input path="name" class="form-control width-120" placeholder="输入账号"  />
+                    <br><br>
+                    <form:input path="password" class="form-control width-120" placeholder="输入密码"  />
+
+                </div>
+                <div class="modal-footer">
+                    <a class="nav-link" href="#" style="color: #a8bbff;font-size: 15px;" data-toggle="modal" data-target="#resModal" data-dismiss="modal">没有账号？立即申请</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        登录
+                    </button>
+                    </form:form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="width: 100%;">
     <a class="navbar-brand" href="#" style="font-size: 30px;">xx图书馆</a>
@@ -47,13 +144,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 40%;">
         <ul class="navbar-nav mr-auto" >
-            <li class="nav-item" style="margin-right: 10px;">
-                <a class="nav-link" href="#" style="font-size: 15px;">图书馆新闻</a>
+            <li class="nav-item active" style="margin-right: 10px;">
+                <a class="nav-link" href="search" style="font-size: 15px;">馆藏书籍</a>
             </li>
             <li class="nav-item" style="margin-right: 10px;">
                 <a class="nav-link" href="#" style="font-size: 15px;">好书推荐</a>
             </li>
-            <li class="nav-item active" style="margin-right: 10px;">
+            <li class="nav-item" style="margin-right: 10px;">
                 <a class="nav-link" href北京大学图书馆="#" style="font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
             </li>
 
@@ -76,7 +173,7 @@
             <div id="search" style="margin-left: 30%;float: left;width: 30%;height: 5%;margin-top: -3px;">
                 <input type="text" class="form-control" id="search1"  style="width: 100%;height: 100%;opacity: 0.8;">
             </div>
-            <button type="submit" class="btn btn-primary" style="height: 4%;width: 6%;margin-left: 2%;">搜索</button>
+            <button type="submit" class="btn btn-primary" style="height: 4%;width: 6%;margin-left: 2%;" onclick="searchnew();">搜索</button>
         </div>
 
     <div id="books"  class="bookcontent" style="height: auto;">
@@ -92,7 +189,7 @@
             </div>
 
             <div v-if="book.uid === '0'" style="margin-left: 30px;">
-                <img src="/ht/xitongpic/book.png" style="width: 50px; height: 50px;margin-left:30%;margin-top:30%;" data-toggle="tooltip" data-placement="top" title="预约借书">
+                <img src="/ht/xitongpic/book.png"  v-on:click="yuyue(book.id)"  style="width: 50px; height: 50px;margin-left:30%;margin-top:30%;" data-toggle="tooltip" data-placement="top" title="预约借书">
             </div>
 
             <div v-else style="margin-left: 30px;">
@@ -131,7 +228,7 @@
                 _this.totlePage = parseInt(_this.books.length/_this.pageSize)+1;
             }else {
                 _this.totlePage = parseInt(_this.books.length/_this.pageSize);
-            }
+            };
 
         },
         computed:{
@@ -166,35 +263,81 @@
                     app3.nowPage -= 1;
                 }
             },
-            
-            searchnew:function () {
-                var search = {search:$('#search').val()};
-                $.ajax({
-                    type:'GET',
-                    url:'search2',
-                    dataType:'JSON',
-                    timeout:20000,
-                    data: search,
-                    success:function (data) {
-                        this.books=data;
-                    }
-                })
+            refush:function () {
+                var _this = this;
+                _this.nowPage = 1;
+                if(_this.books.length%_this.pageSize != 0){
+                    _this.totlePage = parseInt(_this.books.length/_this.pageSize)+1;
+                }else {
+                    _this.totlePage = parseInt(_this.books.length/_this.pageSize);
+                };
+                page();
+            },
+            yuyue:function (data) {
+                console.log(data);
+                if (${yonghu.id==0}){
+                    $('#warn').fadeIn("slow");
+                    setTimeout(function () {
+                        $('#warn').fadeOut("slow");
+                    },1000);
+                }else {
+                    var y = {bid:data,uid:${yonghu.id}};
+                    $.ajax({
+                        type:"GET",
+                        url: "yuyue",
+                        dataType: "JSON",
+                        timeout: 20000,
+                        data:y,
+                        success:function (data) {
+                            this.books.forEach(book =>{
+                                if (book.id==data){
+                                    book.uid=${yonghu.id};
+                                    $('#success').fadeIn();
+                                }
+                            })
+                        }
+                    });
+
+                }
             }
         }
     })
 </script>
 
 <script>
-    var setTotalCount = bookcontent.books.length;
-    $('#box').paging({
-        initPageNo: 1, // 初始页码
-        totalPages: bookcontent.totlePage, //总页数
-        totalCount: '合计' + setTotalCount + '条数据', // 条目总数
-        slideSpeed: 600, // 缓动速度。单位毫秒
-        jump: true, //是否支持跳转
-        callback: function(page) { // 回调函数
-            console.log(page);
-        }
-    })
+    function page() {
+        var setTotalCount = bookcontent.books.length;
+        $('#box').paging({
+            initPageNo: 1, // 初始页码
+            totalPages: bookcontent.totlePage, //总页数
+            totalCount: '合计' + setTotalCount + '条数据', // 条目总数
+            slideSpeed: 600, // 缓动速度。单位毫秒
+            jump: true, //是否支持跳转
+            callback: function(page) { // 回调函数
+                console.log(page);
+            }
+        });
+    }
+
+    page();
+
+    function searchnew() {
+        var search = {search:$('#search1').val()};
+        console.log(search);
+        $.ajax({
+            type:'GET',
+            url:'search2',
+            dataType:'JSON',
+            timeout:20000,
+            data: search,
+            success:function (data) {
+                // console.log("搜索");
+                // console.log(data);
+                bookcontent.books=data;
+                bookcontent.refush();
+            }
+        })
+    };
+
 </script>
 </html>

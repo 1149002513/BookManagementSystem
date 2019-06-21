@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import server.impl.UserServerImpl;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -28,8 +29,9 @@ public class BookController {
     }
 
     @RequestMapping(value = "logining")
-    public String logining(Yonghu yonghu, Model model, HttpServletResponse response) throws IOException {
+    public String logining(Yonghu yonghu, Model model, HttpSession session) throws IOException {
         yonghu = userServerImpl.getYonghu(yonghu);
+        session.setAttribute("yonghu",yonghu);
         if (yonghu !=null){
             yonghu = userServerImpl.getBooks(yonghu);
             model.addAttribute("yonghu",yonghu);
@@ -58,12 +60,25 @@ public class BookController {
     }
 
     @RequestMapping("search")
-    public String search(String search,Model model){
+    public String search(String search, Model model, HttpSession session){
+        Yonghu yonghu = new Yonghu();
+        if (session.getAttribute("yonghu") != null){
+            yonghu = (Yonghu) session.getAttribute("yonghu");
+        }else {
+            yonghu.setId("0");
+        }
+        model.addAttribute("yonghu",yonghu);
+        if (search!=null){
+//            System.out.println("去除空格");
+            search = search.trim();
+        }
         System.out.println(search);
         ArrayList<Book> books = new ArrayList<>();
-        if (search==null){
+        if (search==null || search.equals("")){
+            System.out.println(1);
             books = userServerImpl.getAll();
         }else {
+            System.out.println(2);
             books = userServerImpl.searchAll(search);
         }
         model.addAttribute("books",books);
@@ -74,10 +89,17 @@ public class BookController {
     @RequestMapping("search2")
     @ResponseBody
     public ArrayList<Book> search2(String search,Model model){
+        if (search!=null){
+//            System.out.println("去除空格");
+            search = search.trim();
+        }
+        System.out.println(search);
         ArrayList<Book> books = new ArrayList<>();
-        if ( search==null){
+        if (search==null || search.equals("")){
+            System.out.println(1);
             books = userServerImpl.getAll();
         }else {
+            System.out.println(2);
             books = userServerImpl.searchAll(search);
         }
 

@@ -217,7 +217,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 40%;">
         <ul class="navbar-nav mr-auto" >
             <li class="nav-item" style="margin-right: 10px;">
-                <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;">图书馆新闻</a>
+                <a class="nav-link" href="search" style="color: #ffffff;font-size: 15px;">馆藏书籍</a>
             </li>
             <li class="nav-item" style="margin-right: 10px;">
                 <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;">好书推荐</a>

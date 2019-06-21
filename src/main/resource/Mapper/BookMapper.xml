@@ -32,7 +32,7 @@
 
     <!--全字段模糊搜索-->
     <select id="searchAll" resultType="Book">
-        select * from book where id=#{search} or name=#{search} or author=#{search} or location=#{search}
+        select * from book where id like concat(concat('%',#{search}),'%') or name like concat(concat('%',#{search}),'%') or author like concat(concat('%',#{search}),'%') or location like concat(concat('%',#{search}),'%')
     </select>
 
 </mapper>
