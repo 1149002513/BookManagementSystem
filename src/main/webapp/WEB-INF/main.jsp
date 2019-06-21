@@ -249,7 +249,7 @@
 
         <div style="margin-top: 5%;">
             <div id="search" style="float: left;width: 30%;height: 9%;margin-top: -3px;">
-                <input type="text" class="form-control" id="search1"  style="width: 100%;height: 100%;opacity: 0.8;">
+                <input type="text" class="form-control" id="search1" name="search"  style="width: 100%;height: 100%;opacity: 0.8;">
             </div>
             <button type="submit" class="btn btn-primary" style="height: 7%;width: 6%;margin-left: 2%;">搜索</button>
         </div>

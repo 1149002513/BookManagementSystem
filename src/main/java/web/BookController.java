@@ -59,6 +59,7 @@ public class BookController {
 
     @RequestMapping("search")
     public String search(String search,Model model){
+        System.out.println(search);
         ArrayList<Book> books = new ArrayList<>();
         if (search==null){
             books = userServerImpl.getAll();
