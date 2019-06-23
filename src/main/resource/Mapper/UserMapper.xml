@@ -13,6 +13,16 @@
         insert into yonghu(id,name,password,avatar,book_number,limit_y,active) values (#{id},#{name},#{password},#{avatar},#{book_number},#{limit_y},#{active})
     </insert>
 
+    <!--查询用户共借了几本书-->
+    <select id="getNumber" parameterType="string" resultType="int">
+        select book_number from yonghu where id=#{id}
+    </select>
+
+    <!--借书中的用户操作-->
+    <update id="brrowBook" parameterType="string">
+        update yonghu set book_number=book_number+1 where id = #{id}
+    </update>
+
     <!--查询用户借了哪些书-->
     <select id="getBooks" parameterType="Yonghu" resultMap="Books">
         select * from yonghu where id=#{id}

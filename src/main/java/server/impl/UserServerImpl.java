@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import server.UserServer;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -63,5 +64,37 @@ public class UserServerImpl implements UserServer {
     public ArrayList<Book> searchAll(String search) {
         ArrayList<Book> books = bookMapper.searchAll(search);
         return books;
+    }
+
+    @Override
+    public Timestamp getTime(String id) {
+
+        Timestamp timestamp = recordMapper.getTime(id);
+        return timestamp;
+    }
+
+    @Override
+    public boolean judgeTimeOut(String id) {
+        Timestamp timestamp = getTime(id);
+        timestamp.setTime(timestamp.getTime()+1000L*60L*60L*24L*30L);
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+        if (current.before(timestamp)){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int borrowBook(String uid, String bid) {
+//        int affect = bookMapper.borrowBook(uid,bid);
+        bookMapper.borrowBook(uid,bid);
+        int affect = userMapper.brrowBook(uid);
+        Borrowingrecord borrowingrecord = new Borrowingrecord();
+        String rid = UUID.randomUUID().toString().replace("-","");
+        borrowingrecord.setId(rid);
+        borrowingrecord.setAccount_id(uid);
+        borrowingrecord.setBook_id(bid);
+        affect = recordMapper.addRecord(borrowingrecord);
+        return affect;
     }
 }

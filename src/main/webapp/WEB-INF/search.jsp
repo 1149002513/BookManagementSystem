@@ -55,6 +55,24 @@
             height: 50px;
             text-align: center;
         }
+        #titp{
+            display: none;
+            position: absolute;
+            left: 30%;
+            top: 40%;
+            width: 200px;
+            height: 50px;
+            text-align: center;
+        }
+        #false{
+            display: none;
+            position: absolute;
+            left: 30%;
+            top: 40%;
+            width: 200px;
+            height: 50px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -66,6 +84,14 @@
 
 <div id="warn" class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>请先登录！</strong>
+</div>
+
+<div id="titp" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>最多只能借5本哦！</strong>
+</div>
+
+<div id="false" class="alert alert-success" role="alert">
+    预约失败!可能有书超时未还！
 </div>
 
 
@@ -275,29 +301,48 @@
             },
             yuyue:function (data) {
                 console.log(data);
-                if (${yonghu.id==0}){
-                    $('#warn').fadeIn("slow");
+                if (${yonghu.book_number + 1 >5}){
+                    $('#titp').fadeIn('slow');
                     setTimeout(function () {
-                        $('#warn').fadeOut("slow");
+                        $('#titp').fadeOut("slow");
                     },1000);
                 }else {
-                    var y = {bid:data,uid:${yonghu.id}};
-                    $.ajax({
-                        type:"GET",
-                        url: "yuyue",
-                        dataType: "JSON",
-                        timeout: 20000,
-                        data:y,
-                        success:function (data) {
-                            this.books.forEach(book =>{
-                                if (book.id==data){
-                                    book.uid=${yonghu.id};
-                                    $('#success').fadeIn();
+                    if (${yonghu.id==0}){
+                        $('#warn').fadeIn("slow");
+                        setTimeout(function () {
+                            $('#warn').fadeOut("slow");
+                        },1000);
+                    }else {
+                        var y = {bid:data,uid:${yonghu.id}};
+                        $.ajax({
+                            type:"GET",
+                            url: "yuyue",
+                            dataType: "JSON",
+                            timeout: 20000,
+                            data:y,
+                            success:function (data) {
+                                if (data){
+                                    for (var i=0;i<bookcontent.books.length;i++){
+                                        console.log(bookcontent.books[i])
+                                        if (bookcontent.books[i].id==y.bid){
+                                            bookcontent.books[i].uid=${yonghu.id};
+                                            $('#success').fadeIn();
+                                            setTimeout(function () {
+                                                $('#success').fadeOut("slow");
+                                            },1000);
+                                        }
+                                    }
+                                } else {
+                                    $('#false').fadeIn();
+                                    setTimeout(function () {
+                                        $('#false').fadeOut("slow");
+                                    },1000);
                                 }
-                            })
-                        }
-                    });
 
+                            }
+                        });
+
+                    }
                 }
             }
         }

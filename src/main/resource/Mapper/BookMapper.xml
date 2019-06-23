@@ -9,10 +9,10 @@
         insert  into book (id,name,cover,lend,price,count) values (#{id},#{name},#{cover},#{lend},#{price},#{count})
     </insert>
 
-    <!--借图书-->
+    <!--借图书中的改变图书-->
     
-    <update id="borrowBook" parameterType="string">
-        update book set lend = 1 and count=count+1 where id = #{id}
+    <update id="borrowBook">
+        update book set count=count+1 , uid=#{uid} where id = #{bid}
     </update>
 
     <!--还书-->

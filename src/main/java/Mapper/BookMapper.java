@@ -1,6 +1,7 @@
 package Mapper;
 
 import entity.Book;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ public interface BookMapper {
 
     public void addBook(Book book);
 
-    public void borrowBook(String id);
+    public int borrowBook(@Param("uid") String uid, @Param("bid") String bid);
 
     public void re(String id);
 

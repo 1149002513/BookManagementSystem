@@ -7,8 +7,8 @@ public class Borrowingrecord {
     private String id;
     private String book_id;
     private String account_id;
-    private Timestamp lend_time;
-    private Timestamp re_time;
+    private Timestamp lend_time = new Timestamp(System.currentTimeMillis());
+    private Timestamp re_time = null;
 
     private Book book;
 

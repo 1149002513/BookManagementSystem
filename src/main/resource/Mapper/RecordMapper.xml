@@ -21,4 +21,15 @@
             <result column="localtion" property="localtion" />
         </association>
     </resultMap>
+    
+    
+    <!--获取一个用户最早借书且还未归还的时间-->
+    <select id="getTime" parameterType="string" resultType="java.sql.Timestamp">
+        select lend_time from borrowingrecord where account_id=#{id} and re_time is null order by lend_time asc limit 1
+    </select>
+
+    <!--借书操作之写入记录-->
+    <insert id="addRecord" parameterType="Borrowingrecord">
+        insert into borrowingrecord(id,book_id,account_id,lend_time) values (#{id},#{book_id},#{account_id},#{lend_time})
+    </insert>
 </mapper>

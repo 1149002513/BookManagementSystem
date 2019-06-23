@@ -107,4 +107,17 @@ public class BookController {
 
         return books;
     }
+
+    @RequestMapping("yuyue")
+    @ResponseBody
+    public boolean yuyue(String bid,String uid){
+//        System.out.println(userServerImpl.judgeTimeOut(uid));
+        if (!userServerImpl.judgeTimeOut(uid)){
+            return false;
+        }else {
+            int i = userServerImpl.borrowBook(uid,bid);
+//            System.out.println(i);
+        }
+        return true;
+    }
 }

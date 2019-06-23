@@ -10,4 +10,7 @@ public interface UserMapper {
 
     public Yonghu getBooks(Yonghu yonghu);
 
+//    用户借书操作
+    public int brrowBook(String id);
+
 }
