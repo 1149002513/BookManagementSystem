@@ -74,13 +74,13 @@ public class Borrowingrecord {
 
     @Override
     public String toString() {
-        return "Borrowingrecord{" +
-                "id='" + id + '\'' +
-                ", book_id='" + book_id + '\'' +
-                ", account_id='" + account_id + '\'' +
-                ", lend_time=" + lend_time +
-                ", re_time=" + re_time +
-                ", book=" + book +
+        return "{" +
+                "id:'" + id + '\'' +
+                ", book_id:'" + book_id + '\'' +
+                ", account_id:'" + account_id + '\'' +
+                ", lend_time:'" + lend_time +'\''+
+                ", re_time:'" + re_time +'\''+
+                ", book:" + book +
                 '}';
     }
 }

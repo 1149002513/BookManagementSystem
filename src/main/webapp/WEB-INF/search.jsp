@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
@@ -164,7 +165,7 @@
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="width: 100%;">
-    <a class="navbar-brand" href="#" style="font-size: 30px;">xx图书馆</a>
+    <a class="navbar-brand" href="/main" style="font-size: 30px;">xx图书馆</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -177,7 +178,14 @@
                 <a class="nav-link" href="#" style="font-size: 15px;">好书推荐</a>
             </li>
             <li class="nav-item" style="margin-right: 10px;">
-                <a class="nav-link" href北京大学图书馆="#" style="font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
+                <c:choose>
+                    <c:when test="${yonghu.id ne null}">
+                        <a href="mymain"><img src="${yonghu.avatar}" alt="${yonghu.name}的头像" style="width: 60px;height: 60px;border-radius: 100%;margin-top: -10px;"></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="nav-link" href="#" style="font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
+                    </c:otherwise>
+                </c:choose>
             </li>
 
             <li class="nav-item" style="margin-right: 10px;">
@@ -307,13 +315,13 @@
                         $('#titp').fadeOut("slow");
                     },1000);
                 }else {
-                    if (${yonghu.id==0}){
+                    if (${yonghu.id=='0'}){
                         $('#warn').fadeIn("slow");
                         setTimeout(function () {
                             $('#warn').fadeOut("slow");
                         },1000);
                     }else {
-                        var y = {bid:data,uid:${yonghu.id}};
+                        var y = {bid:data,uid:"${yonghu.id}"};
                         $.ajax({
                             type:"GET",
                             url: "yuyue",
@@ -325,7 +333,7 @@
                                     for (var i=0;i<bookcontent.books.length;i++){
                                         console.log(bookcontent.books[i])
                                         if (bookcontent.books[i].id==y.bid){
-                                            bookcontent.books[i].uid=${yonghu.id};
+                                            bookcontent.books[i].uid='${yonghu.id}';
                                             $('#success').fadeIn();
                                             setTimeout(function () {
                                                 $('#success').fadeOut("slow");
@@ -350,6 +358,7 @@
 </script>
 
 <script>
+
     function page() {
         var setTotalCount = bookcontent.books.length;
         $('#box').paging({

@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: sunqi
@@ -210,7 +211,7 @@
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="width: 100%;">
-    <a class="navbar-brand" href="#" style="font-size: 30px;">xx图书馆</a>
+    <a class="navbar-brand" href="/main" style="font-size: 30px;">xx图书馆</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -223,7 +224,14 @@
                 <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;">好书推荐</a>
             </li>
             <li class="nav-item active" style="margin-right: 10px;">
-                <a class="nav-link" href北京大学图书馆="#" style="color: #ffffff;font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
+                <c:choose>
+                    <c:when test="${yonghu.id ne null}">
+                        <a href="mymain"><img src="${yonghu.avatar}" alt="${yonghu.name}的头像" style="width: 60px;height: 60px;border-radius: 100%;margin-top: -10px;"></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
+                    </c:otherwise>
+                </c:choose>
             </li>
 
             <li class="nav-item" style="margin-right: 10px;">
@@ -270,6 +278,7 @@
 </body>
 
 <script>
+
     var app1 = new Vue({
         el:'#app-1',
         data:{

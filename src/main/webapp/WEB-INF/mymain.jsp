@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="v-on" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: sunqi
@@ -13,9 +14,11 @@
     <title>我的图书馆</title>
     <script src="/ht/jquery/jquery-3.3.1.js"></script>
     <script src="/ht/bootstrap/js/bootstrap.js"></script>
+    <script src="/ht/vue/vue.js"></script>
     <link rel='stylesheet' href="/ht/bootstrap/css/bootstrap.css">
     <link rel='stylesheet' href="/ht/bootstrap/css//bootstrap-grid.css">
     <link rel='stylesheet' href="/ht/bootstrap/css//bootstrap-reboot.css">
+
 
     <style type="text/css">
         .row{
@@ -28,7 +31,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="width: 100%;">
-    <a class="navbar-brand" href="#" style="font-size: 30px;">xx图书馆</a>
+    <a class="navbar-brand" href="/main" style="font-size: 30px;">xx图书馆</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,7 +44,14 @@
                 <a class="nav-link" href="#" style="font-size: 15px;">好书推荐</a>
             </li>
             <li class="nav-item active" style="margin-right: 10px;">
-                <a class="nav-link" href北京大学图书馆="#" style="font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
+                <c:choose>
+                    <c:when test="${yonghu.id ne null}">
+                        <a href="mymain"><img src="${yonghu.avatar}" alt="${yonghu.name}的头像" style="width: 60px;height: 60px;border-radius: 100%;margin-top: -10px;"></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="nav-link" href="#" style="font-size: 15px;" data-toggle="modal" data-target="#myModal">我的图书馆</a>
+                    </c:otherwise>
+                </c:choose>
             </li>
 
             <li class="nav-item" style="margin-right: 10px;">
@@ -57,83 +67,186 @@
     </div>
 </nav>
 
-<div class="row">
+<div id="app-5" class="row">
     <div class="col-7">
         <p>欢迎 ${yonghu.name}:</p>
         <h3>已借图书:${yonghu.book_number}</h3>
-        <div id="app-2">
+        <div>
 
-            <c:choose>
-                <c:when test="${ !empty yonghu.books}">
-                    <c:forEach items="${yonghu.books}" var="book">
-                        <div class="text-center" style="margin-right: 10px;float: left;border: rgba(127,129,123,0.73) 2px solid; border-radius: 10px;">
-                            <img src="${book.cover}" alt="${book.name}的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
-                            <p>书名：${book.name}</p>
-                            <p>作者：${book.author}</p>
-                            <p>价格：${book.price}</p>
-                            <p>被借次数：${book.count}</p>
-                        </div>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-                    <p>你现在暂时没有借书哦！快来一起读书吧！</p>
-                    <img src="/ht/xitongpic/mymianbook.jpg">
-                </c:otherwise>
-            </c:choose>
+            <div id="have" v-if="showbooks.length === 0" >
+                <p>你现在暂时没有借书哦！快来一起读书吧！</p>
+                <img src="/ht/xitongpic/mymianbook.jpg">
+            </div>
+
+            <div id="no" v-else v-for="book in showbooks" class="text-center" style="margin-right: 10px;float: left;border: rgba(127,129,123,0.73) 2px solid; border-radius: 10px;">
+                <div>
+                    <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
+                </div>
+                <div style="float: left">
+                    <p>书名：{{book.name}}</p>
+                    <p>作者：{{book.author}}</p>
+                    <p>价格：{{book.price}}</p>
+                    <p>被借次数：{{book.count}}</p>
+                </div>
+                <div>
+                    <img src="/ht/xitongpic/huan.png" style="width: 40px; height: 40px;" data-toggle="tooltip" data-placement="top" title="还书">
+                </div>
+            </div>
+
+            <div style="clear: both"></div>
+
+            <div>
+                <button v-on:click="b_prePage">上一页</button>
+                <span>{{b_nowPage}}</span>
+                <button v-on:click="b_nextPage">下一页</button>
+                <span>共{{b_totlePage}}</span>
+            </div>
+
 
         </div>
     </div>
     <div class="col-5">
         <h3>借阅记录：</h3>
 
-        <c:choose>
-            <c:when test="${ !empty records}">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">序号</th>
-                        <th scope="col">书名</th>
-                        <th scope="col">作者</th>
-                        <th scope="col">借书日期</th>
-                        <th scope="col">还书日期</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${records}" var="record" varStatus="i">
-                            <tr>
-                                <th scope="row">${i.index}</th>
-                                <td>${record.book.name}</td>
-                                <td>${record.book.author}</td>
-                                <td>${record.lend_time}</td>
-                                <c:choose>
-                                    <c:when test="${!empty record.re_time}">
-                                        <td>${record.re_time}</td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>未归还</td>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tr>
-                        </c:forEach>
+        <div v-if="records.length===0">
+            <p>暂时还没有借阅记录哦！</p>
+            <hr style="border: rgba(127,129,123,0.73) 2px solid;">
+            <p>快开始你的读书之旅吧！</p>
+            <img src="/ht/xitongpic/mymainbook2.jpg" style="width: 80%;height: 40%;">
+        </div>
 
-                    </tbody>
-                </table>
-            </c:when>
+        <div v-else>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">序号</th>
+                    <th scope="col">书名</th>
+                    <th scope="col">作者</th>
+                    <th scope="col">借书日期</th>
+                    <th scope="col">还书日期</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(record,index) in showrecords">
+                    <th scope="row">{{index+1}}</th>
+                    <td>{{record.book.name}}</td>
+                    <td>{{record.book.author}}</td>
+                    <td>{{record.lend_time}}</td>
+                    <td v-if='record.re_time!=="null"' && record.re_time!==''">{{record.re_time}}</td>
+                    <td v-else>未归还</td>
+                </tr>
+                </tbody>
+            </table>
 
-            <c:otherwise>
-                <p>暂时还没有借阅记录哦！</p>
-                <hr style="border: rgba(127,129,123,0.73) 2px solid;">
-                <p>快开始你的读书之旅吧！</p>
-                <img src="/ht/xitongpic/mymainbook2.jpg" style="width: 80%;height: 40%;">
+            <div>
+                <button v-on:click="r_prePage">上一页</button>
+                <span>{{r_nowPage}}</span>
+                <button v-on:click="r_nextPage">下一页</button>
+                <span>共{{r_totlePage}}</span>
+            </div>
 
-            </c:otherwise>
-        </c:choose>
+        </div>
 
     </div>
 </div>
 
 
+<script>
+    var app5 = new Vue({
+        el:'#app-5',
+        data:{
+            books:${yonghu.books},
+            records:${records},
+            b_pageSize:2,
+            b_totlePage:0,
+            b_nowPage:1,
+            r_pageSize:10,
+            r_totlePage:0,
+            r_nowPage:1
+        },
+        mounted(){
+            var _this = this;
+            _this.b_nowPage = 1;
+            if(_this.books.length%_this.b_pageSize != 0){
+                _this.b_totlePage = parseInt(_this.books.length/_this.b_pageSize)+1;
+            }else {
+                _this.b_totlePage = parseInt(_this.books.length/_this.b_pageSize);
+            };
 
+            _this.r_nowPage=1;
+            if(_this.books.length%_this.r_pageSize != 0){
+                _this.r_totlePage = parseInt(_this.books.length/_this.r_pageSize)+1;
+            }else {
+                _this.r_totlePage = parseInt(_this.books.length/_this.r_pageSize);
+            };
+
+        },
+        computed: {
+            showbooks: function () {
+                var show_books = [];
+                if (this.b_nowPage * this.b_pageSize > this.b_totlePage) {
+                    for (var i = (this.b_nowPage - 1) * this.b_pageSize; i < this.books.length; i++) {
+                        show_books.push(this.books[i])
+                    }
+                } else {
+                    for (var i = (this.b_nowPage - 1) * this.b_pageSize; i < this.b_nowPage * this.b_pageSize; i++) {
+                        show_books.push(this.books[i])
+                    }
+                }
+
+                return show_books;
+            },
+            showrecords: function () {
+                var show_records = [];
+                if (this.r_nowPage * this.r_pageSize > this.r_totlePage) {
+                    for (var i = (this.r_nowPage - 1) * this.r_pageSize; i < this.records.length; i++) {
+                        show_records.push(this.records[i])
+                    }
+                } else {
+                    for (var i = (this.r_nowPage - 1) * this.r_pageSize; i < this.r_nowPage * this.r_pageSize; i++) {
+                        show_records.push(this.records[i])
+                    }
+                }
+                return show_records;
+            }
+        },
+        methods: {
+            b_nextPage: function () {
+                if (app5.b_nowPage + 1 > app5.b_totlePage) {
+                    alert("最后一页了");
+                } else {
+                    app5.b_nowPage += 1;
+                }
+            },
+            b_prePage: function () {
+                if (app5.b_nowPage - 1 < 1) {
+                    alert("前面没有了");
+                } else {
+                    app5.b_nowPage -= 1;
+                }
+            },
+            r_nextPage: function () {
+                if (app5.r_nowPage + 1 > app5.r_totlePage) {
+                    alert("最后一页了");
+                } else {
+                    app5.r_nowPage += 1;
+                }
+            },
+            r_prePage: function () {
+                if (app5.r_nowPage - 1 < 1) {
+                    alert("前面没有了");
+                } else {
+                    app5.r_nowPage -= 1;
+                }
+            },
+            huanshu: function () {
+
+            }
+        }
+
+    });
+
+</script>
 </body>
 
 </html>

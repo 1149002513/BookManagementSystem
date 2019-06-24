@@ -11,7 +11,7 @@ public interface BookMapper {
 
     public int borrowBook(@Param("uid") String uid, @Param("bid") String bid);
 
-    public void re(String id);
+    public int re(String id);
 
     public ArrayList<Book> getAll();
 

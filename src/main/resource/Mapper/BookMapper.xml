@@ -17,7 +17,7 @@
 
     <!--还书-->
     <update id="re" parameterType="string">
-        update book set lend = 0 where id = #{id}
+        update book set uid = 0 where id = #{id}
     </update>
 
     <!--按照书的id查询书-->

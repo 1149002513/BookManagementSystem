@@ -76,10 +76,15 @@ public class UserServerImpl implements UserServer {
     @Override
     public boolean judgeTimeOut(String id) {
         Timestamp timestamp = getTime(id);
-        timestamp.setTime(timestamp.getTime()+1000L*60L*60L*24L*30L);
-        Timestamp current = new Timestamp(System.currentTimeMillis());
-        if (current.before(timestamp)){
+        System.out.println(timestamp);
+        if (timestamp==null){
             return true;
+        }else {
+            timestamp.setTime(timestamp.getTime()+1000L*60L*60L*24L*30L);
+            Timestamp current = new Timestamp(System.currentTimeMillis());
+            if (current.before(timestamp)){
+                return true;
+            }
         }
         return false;
     }
@@ -95,6 +100,14 @@ public class UserServerImpl implements UserServer {
         borrowingrecord.setAccount_id(uid);
         borrowingrecord.setBook_id(bid);
         affect = recordMapper.addRecord(borrowingrecord);
+        return affect;
+    }
+
+    @Override
+    public int reBook(Borrowingrecord borrowingrecord) {
+
+        int affect = bookMapper.re(borrowingrecord.getBook_id());
+        affect = recordMapper.reRecord(borrowingrecord);
         return affect;
     }
 }

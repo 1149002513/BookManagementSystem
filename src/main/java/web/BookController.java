@@ -14,6 +14,7 @@ import server.impl.UserServerImpl;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 @Controller
@@ -23,17 +24,21 @@ public class BookController {
     UserServerImpl userServerImpl;
 
     @RequestMapping(value = {"","main"})
-    public String hello(Yonghu yonghu, Model model){
-        model.addAttribute("account", yonghu);
+    public String hello(Yonghu yonghu, Model model,HttpSession session){
+        if (session.getAttribute("yonghu") != null){
+            yonghu = (Yonghu) session.getAttribute("yonghu");
+        }
+        model.addAttribute("yonghu", yonghu);
         return "main";
     }
 
     @RequestMapping(value = "logining")
     public String logining(Yonghu yonghu, Model model, HttpSession session) throws IOException {
         yonghu = userServerImpl.getYonghu(yonghu);
-        session.setAttribute("yonghu",yonghu);
+
         if (yonghu !=null){
             yonghu = userServerImpl.getBooks(yonghu);
+            session.setAttribute("yonghu",yonghu);
             model.addAttribute("yonghu",yonghu);
             ArrayList<Borrowingrecord> records = userServerImpl.getRecord(yonghu.getId());
             model.addAttribute("records",records);
@@ -49,6 +54,14 @@ public class BookController {
         }
 
         return "error";
+    }
+
+    @RequestMapping("mymain")
+    public String mymain(Model model,HttpSession session){
+        Yonghu yonghu = (Yonghu) session.getAttribute("yonghu");
+        ArrayList<Borrowingrecord> records = userServerImpl.getRecord(yonghu.getId());
+        model.addAttribute("records",records);
+        return "mymain";
     }
 
     @RequestMapping("regist")
@@ -108,6 +121,7 @@ public class BookController {
         return books;
     }
 
+//    借书
     @RequestMapping("yuyue")
     @ResponseBody
     public boolean yuyue(String bid,String uid){
@@ -118,6 +132,19 @@ public class BookController {
             int i = userServerImpl.borrowBook(uid,bid);
 //            System.out.println(i);
         }
+        return true;
+    }
+
+
+//    还书
+    @RequestMapping("huan")
+    @ResponseBody
+    public boolean huan(String bid,String uid){
+        Borrowingrecord borrowingrecord = new Borrowingrecord();
+        borrowingrecord.setBook_id(bid);
+        borrowingrecord.setAccount_id(uid);
+        borrowingrecord.setRe_time(new Timestamp(System.currentTimeMillis()));
+        int affect = userServerImpl.reBook(borrowingrecord);
         return true;
     }
 }

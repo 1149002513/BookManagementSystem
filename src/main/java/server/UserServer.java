@@ -37,4 +37,7 @@ public interface UserServer {
 //    借书操作
     public int borrowBook(String uid,String bid);
 
+//    还书操作
+    public int reBook(Borrowingrecord borrowingrecord);
+
 }

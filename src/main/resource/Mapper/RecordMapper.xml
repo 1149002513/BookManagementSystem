@@ -32,4 +32,9 @@
     <insert id="addRecord" parameterType="Borrowingrecord">
         insert into borrowingrecord(id,book_id,account_id,lend_time) values (#{id},#{book_id},#{account_id},#{lend_time})
     </insert>
+
+    <!--还书操作之更新记录-->
+    <update id="reRecord" parameterType="Borrowingrecord">
+        update borrowingrecord set re_time=#{re_time} where book_id=#{book_id} and account_id=#{account_id}
+    </update>
 </mapper>

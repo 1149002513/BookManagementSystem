@@ -14,4 +14,7 @@ public interface RecordMapper {
 
 //    增加借阅记录
     public int addRecord(Borrowingrecord borrowingrecord);
+
+//    还书更新借阅记录
+    public int reRecord(Borrowingrecord borrowingrecord);
 }
