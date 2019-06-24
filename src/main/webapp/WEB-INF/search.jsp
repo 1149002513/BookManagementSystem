@@ -268,7 +268,7 @@
         computed:{
             showbooks:function () {
                 var show_books = [];
-                if (this.nowPage*this.pageSize > this.totlePage){
+                if (this.nowPage*this.pageSize > this.books.length){
                     for (var i = (this.nowPage-1)* this.pageSize;i<this.books.length;i++){
                         show_books.push(this.books[i])
                     }

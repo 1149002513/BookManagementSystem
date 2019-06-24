@@ -198,7 +198,7 @@
         computed: {
             showbooks: function () {
                 var show_books = [];
-                if (this.b_nowPage * this.b_pageSize > this.b_totlePage) {
+                if (this.b_nowPage * this.b_pageSize > this.books.length) {
                     for (var i = (this.b_nowPage - 1) * this.b_pageSize; i < this.books.length; i++) {
                         show_books.push(this.books[i])
                     }
@@ -212,7 +212,7 @@
             },
             showrecords: function () {
                 var show_records = [];
-                if (this.r_nowPage * this.r_pageSize > this.r_totlePage) {
+                if (this.r_nowPage * this.r_pageSize > this.records.length) {
                     for (var i = (this.r_nowPage - 1) * this.r_pageSize; i < this.records.length; i++) {
                         show_records.push(this.records[i])
                     }
