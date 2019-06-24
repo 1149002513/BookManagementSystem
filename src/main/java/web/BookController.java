@@ -1,12 +1,10 @@
 package web;
 
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.JsonObject;
 import entity.Book;
 import entity.Borrowingrecord;
 import entity.Yonghu;
-import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class BookController {
@@ -133,12 +129,16 @@ public class BookController {
         if (!userServerImpl.judgeTimeOut(uid)){
             return false;
         }else {
-            int i = userServerImpl.borrowBook(uid,bid);
             Yonghu yonghu = (Yonghu) session.getAttribute("yonghu");
-            yonghu = userServerImpl.getYonghu(yonghu);
-            yonghu = userServerImpl.getBooks(yonghu);
-            session.setAttribute("yonghu",yonghu);
+            if (yonghu.getLimit_y()==1){
+                return false;
+            }else {
+                int i = userServerImpl.borrowBook(uid,bid);
+                yonghu = userServerImpl.getYonghu(yonghu);
+                yonghu = userServerImpl.getBooks(yonghu);
+                session.setAttribute("yonghu",yonghu);
 //            System.out.println(i);
+            }
         }
         return true;
     }

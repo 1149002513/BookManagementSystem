@@ -65,7 +65,7 @@
                 jumpBtn = $el.find('.jump-button'),
                 jumpText = $el.find('.jump-text');
             prePage.on('click', function() {
-                bookcontent.nowPage--;
+                bookcontent.prePage();
                 pageIndex--;
                 if (pageIndex < 1) pageIndex = 1;
                 handles(pageIndex);
@@ -78,7 +78,7 @@
 			});
 
             nextPage.on('click', function() {
-                bookcontent.nowPage++;
+                bookcontent.nextPage();
                 pageIndex++;
                 if (pageIndex > lis.length) pageIndex = lis.length;
                 handles(pageIndex);
@@ -99,7 +99,7 @@
             jumpBtn.on('click', function() {
                 var jumpNum = parseInt(jumpText.val().replace(/\D/g, ''));
                 if (jumpNum && jumpNum >= 1 && jumpNum <= totalPages) {
-                    bookcontent.nowPage = jumpNum;
+                    // bookcontent.nowPage = jumpNum;
                     pageIndex = jumpNum;
                     handles(pageIndex);
                     jumpText.val(jumpNum);
@@ -110,7 +110,7 @@
             })
 
             lis.on('click', function() {
-                bookcontent.nowPage = $(this).index() + 1;
+                // bookcontent.nowPage = $(this).index() + 1;
                 pageIndex = $(this).index() + 1;
                 handles(pageIndex);
             })

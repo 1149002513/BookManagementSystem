@@ -7,20 +7,30 @@ public class Book {
     private String cover;
     private String author;
     private Double price;
+    private String location;
     private Integer count;
     private String uid; //用户id
 
     public Book() {
     }
 
-    public Book(String id, String name, String cover, String author, Double price, Integer count, String uid) {
+    public Book(String id, String name, String cover, String author, Double price, String location, Integer count, String uid) {
         this.id = id;
         this.name = name;
         this.cover = cover;
         this.author = author;
         this.price = price;
+        this.location = location;
         this.count = count;
         this.uid = uid;
+    }
+
+    public String getlocation() {
+        return location;
+    }
+
+    public void setlocation(String location) {
+        this.location = location;
     }
 
     public String getAuthor() {
@@ -87,8 +97,10 @@ public class Book {
                 ", cover:'" + cover + '\'' +
                 ", author:'" + author + '\'' +
                 ", price:" + price +
+                ", location:'" + location + '\'' +
                 ", count:" + count +
                 ", uid:'" + uid + '\'' +
                 '}';
     }
+
 }

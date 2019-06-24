@@ -193,7 +193,7 @@
             books:${yonghu.books},
             book_number:${yonghu.book_number},
             records:${records},
-            b_pageSize:2,
+            b_pageSize:3,
             b_totlePage:0,
             b_nowPage:1,
             r_pageSize:10,

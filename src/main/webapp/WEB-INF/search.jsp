@@ -92,7 +92,7 @@
 </div>
 
 <div id="false" class="alert alert-success" role="alert">
-    预约失败!可能有书超时未还！
+    预约失败!可能有书超时未还或者借书权限被关闭！
 </div>
 
 
@@ -215,18 +215,19 @@
             <div>
                 <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
             </div>
-            <div style="float: left">
+            <div style="float: left;">
                 <p>书名：{{book.name}}</p>
                 <p>作者：{{book.author}}</p>
                 <p>价格：{{book.price}}</p>
                 <p>被借次数：{{book.count}}</p>
+                <p>所在位置:{{book.location}}</p>
             </div>
 
-            <div v-if="book.uid === '0'" style="margin-left: 30px;">
+            <div v-if="book.uid === '0'" style="margin-right: 10px; float: right;">
                 <img src="/ht/xitongpic/book.png"  v-on:click="yuyue(book.id)"  style="width: 50px; height: 50px;margin-left:30%;margin-top:30%;" data-toggle="tooltip" data-placement="top" title="预约借书">
             </div>
 
-            <div v-else style="margin-left: 30px;">
+            <div v-else style="margin-right: 10px; float: right;">
                 <img src="/ht/xitongpic/book2.png" style="width: 50px; height: 50px;margin-left:30%;margin-top:30%;" data-toggle="tooltip" data-placement="top" title="已借出">
             </div>
         </div>
@@ -251,7 +252,7 @@
         el:'#books',
         data:{
             books:${books},
-            pageSize:2,
+            pageSize:5,
             totlePage:0,
             nowPage:1
         },
@@ -284,17 +285,17 @@
 
         methods:{
             nextPage:function () {
-                if (app3.nowPage+1 > app3.totlePage){
+                if (bookcontent.nowPage+1 > bookcontent.totlePage){
                     alert("最后一页了");
                 } else {
-                    app3.nowPage += 1;
+                    bookcontent.nowPage += 1;
                 }
             },
             prePage:function () {
-                if (app3.nowPage-1<1){
+                if (bookcontent.nowPage-1<1){
                     alert("前面没有了");
                 } else {
-                    app3.nowPage -= 1;
+                    bookcontent.nowPage -= 1;
                 }
             },
             refush:function () {

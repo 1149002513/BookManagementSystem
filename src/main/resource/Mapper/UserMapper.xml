@@ -57,5 +57,5 @@
     <select id="getBooks2" resultType="Book" parameterType="string">
         select * from book where uid=#{id}
     </select>
-
+    
 </mapper>
