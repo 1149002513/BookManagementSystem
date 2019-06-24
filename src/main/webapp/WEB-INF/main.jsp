@@ -225,7 +225,7 @@
             </li>
             <li class="nav-item active" style="margin-right: 10px;">
                 <c:choose>
-                    <c:when test="${yonghu.id ne null}">
+                    <c:when test="${yonghu.id ne null && yonghu.id ne '0'}">
                         <a href="mymain"><img src="${yonghu.avatar}" alt="${yonghu.name}的头像" style="width: 60px;height: 60px;border-radius: 100%;margin-top: -10px;"></a>
                     </c:when>
                     <c:otherwise>

@@ -179,7 +179,7 @@
             </li>
             <li class="nav-item" style="margin-right: 10px;">
                 <c:choose>
-                    <c:when test="${yonghu.id ne null}">
+                    <c:when test="${yonghu.id ne '0' && yonghu.id ne null}">
                         <a href="mymain"><img src="${yonghu.avatar}" alt="${yonghu.name}的头像" style="width: 60px;height: 60px;border-radius: 100%;margin-top: -10px;"></a>
                     </c:when>
                     <c:otherwise>
@@ -308,7 +308,7 @@
                 page();
             },
             yuyue:function (data) {
-                console.log(data);
+                // console.log(data);
                 if (${yonghu.book_number + 1 >5}){
                     $('#titp').fadeIn('slow');
                     setTimeout(function () {
@@ -331,15 +331,15 @@
                             success:function (data) {
                                 if (data){
                                     for (var i=0;i<bookcontent.books.length;i++){
-                                        console.log(bookcontent.books[i])
+                                        // console.log(bookcontent.books[i])
                                         if (bookcontent.books[i].id==y.bid){
                                             bookcontent.books[i].uid='${yonghu.id}';
-                                            $('#success').fadeIn();
-                                            setTimeout(function () {
-                                                $('#success').fadeOut("slow");
-                                            },1000);
                                         }
                                     }
+                                    $('#success').fadeIn();
+                                    setTimeout(function () {
+                                        $('#success').fadeOut("slow");
+                                    },1000);
                                 } else {
                                     $('#false').fadeIn();
                                     setTimeout(function () {

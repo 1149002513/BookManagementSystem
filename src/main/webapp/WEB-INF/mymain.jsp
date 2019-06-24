@@ -25,10 +25,23 @@
             margin-top: 2%;
             margin-left: 2%;
         }
+        #success{
+            display: none;
+            position: absolute;
+            left: 30%;
+            top: 40%;
+            width: 200px;
+            height: 50px;
+            text-align: center;
+        }
     </style>
 
 </head>
 <body>
+
+<div id="success" class="alert alert-success" role="alert">
+    还书成功！
+</div>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="width: 100%;">
     <a class="navbar-brand" href="/main" style="font-size: 30px;">xx图书馆</a>
@@ -45,7 +58,7 @@
             </li>
             <li class="nav-item active" style="margin-right: 10px;">
                 <c:choose>
-                    <c:when test="${yonghu.id ne null}">
+                    <c:when test="${yonghu.id ne null && yonghu.id ne '0'}">
                         <a href="mymain"><img src="${yonghu.avatar}" alt="${yonghu.name}的头像" style="width: 60px;height: 60px;border-radius: 100%;margin-top: -10px;"></a>
                     </c:when>
                     <c:otherwise>
@@ -88,8 +101,8 @@
                     <p>价格：{{book.price}}</p>
                     <p>被借次数：{{book.count}}</p>
                 </div>
-                <div>
-                    <img src="/ht/xitongpic/huan.png" style="width: 40px; height: 40px;" data-toggle="tooltip" data-placement="top" title="还书">
+                <div style="margin-top: 20%;">
+                    <img v-on:click="huanshu(book.id)" src="/ht/xitongpic/huan.png" style="width: 40px; height: 40px;" data-toggle="tooltip" data-placement="top" title="还书">
                 </div>
             </div>
 
@@ -239,8 +252,26 @@
                     app5.r_nowPage -= 1;
                 }
             },
-            huanshu: function () {
-
+            huanshu: function (bid) {
+                $.ajax({
+                    type:'GET',
+                    url:'huanshu',
+                    dataType:'JSON',
+                    timeout:20000,
+                    data:bid,
+                    success:function (data) {
+                        for (var i=0;i<app5.books.length;i++){
+                            if (app5.books[i].id==bid){
+                                app5.books.splice(i,1)
+                            }
+                        }
+                        app5.records = data;
+                        $('#success').fadeIn();
+                        setTimeout(function () {
+                            $('#success').fadeOut("slow");
+                        },1000);
+                    }
+                })
             }
         }
 

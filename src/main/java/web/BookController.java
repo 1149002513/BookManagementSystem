@@ -137,14 +137,15 @@ public class BookController {
 
 
 //    还书
-    @RequestMapping("huan")
+    @RequestMapping("huanshu")
     @ResponseBody
-    public boolean huan(String bid,String uid){
+    public ArrayList<Borrowingrecord> huan(String bid,String uid){
         Borrowingrecord borrowingrecord = new Borrowingrecord();
         borrowingrecord.setBook_id(bid);
         borrowingrecord.setAccount_id(uid);
         borrowingrecord.setRe_time(new Timestamp(System.currentTimeMillis()));
         int affect = userServerImpl.reBook(borrowingrecord);
-        return true;
+        ArrayList<Borrowingrecord> records = userServerImpl.getRecord(uid);
+        return records;
     }
 }
