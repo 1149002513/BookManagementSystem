@@ -40,4 +40,7 @@ public interface UserServer {
 //    还书操作
     public int reBook(Borrowingrecord borrowingrecord);
 
+//    查看具体的借阅记录
+    public Borrowingrecord getRecordByUB(Borrowingrecord borrowingrecord);
+
 }

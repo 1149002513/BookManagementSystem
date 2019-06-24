@@ -17,4 +17,7 @@ public interface RecordMapper {
 
 //    还书更新借阅记录
     public int reRecord(Borrowingrecord borrowingrecord);
+
+//    查看更新的记录
+    public Borrowingrecord getRecordByUB(Borrowingrecord borrowingrecord);
 }

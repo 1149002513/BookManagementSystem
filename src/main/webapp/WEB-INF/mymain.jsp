@@ -165,6 +165,28 @@
 
 
 <script>
+    Date.prototype.Format = function (fmt) { //
+        var o = {
+            "M+": this.getMonth() + 1, //Month
+            "d+": this.getDate(), //Day
+            "h+": this.getHours(), //Hour
+            "m+": this.getMinutes(), //Minute
+            "s+": this.getSeconds(), //Second
+            "q+": Math.floor((this.getMonth() + 3) / 3), //Season
+            "S": this.getMilliseconds() //millesecond
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() +
+
+            "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1,
+
+                (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+    // item.eventDate.timestamp= new Date(item.eventDate.timestamp).Format("dd/MM/yyyy hh:mm:ss");
+
+
     var app5 = new Vue({
         el:'#app-5',
         data:{
@@ -194,6 +216,7 @@
                 _this.r_totlePage = parseInt(_this.records.length/_this.r_pageSize);
             };
 
+
         },
         computed: {
             showbooks: function () {
@@ -214,7 +237,7 @@
                 var show_records = [];
                 if (this.r_nowPage * this.r_pageSize > this.records.length) {
                     for (var i = (this.r_nowPage - 1) * this.r_pageSize; i < this.records.length; i++) {
-                        show_records.push(this.records[i])
+                        show_records.push(this.records[i]);
                     }
                 } else {
                     for (var i = (this.r_nowPage - 1) * this.r_pageSize; i < this.r_nowPage * this.r_pageSize; i++) {
@@ -268,6 +291,7 @@
                 }else {
                     _this.r_totlePage = parseInt(_this.records.length/_this.r_pageSize);
                 };
+
             },
             huanshu: function (bid) {
                 var xinxi={bid:bid};
@@ -279,12 +303,19 @@
                     timeout:20000,
                     data:xinxi,
                     success:function (data) {
+                        alert(data);
                         for (var i=0;i<app5.books.length;i++){
                             if (app5.books[i].id==bid){
                                 app5.books.splice(i,1)
                             }
                         }
-                        app5.records = data;
+                        for (var index = 0;index<app5.records.length;index++){
+                            if (app5.records[index].id == data.id && app5.records[index].re_time == "null"){
+                                app5.records[index].re_time = data.re_time;
+                                // app5.records.splice(index,1,data)
+                            }
+                        }
+
                         app5.book_number -=1;
                         app5.refush();
                         $('#success').fadeIn();
@@ -297,6 +328,7 @@
         }
 
     });
+
 
 </script>
 </body>

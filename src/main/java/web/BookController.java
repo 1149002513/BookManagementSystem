@@ -1,9 +1,12 @@
 package web;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonObject;
 import entity.Book;
 import entity.Borrowingrecord;
 import entity.Yonghu;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import server.impl.UserServerImpl;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class BookController {
@@ -143,8 +147,8 @@ public class BookController {
 //    还书
     @RequestMapping("huanshu")
     @ResponseBody
-    public ArrayList<Borrowingrecord> huanshu(String bid,HttpSession session){
-        System.out.println(bid);
+    public String huanshu(String bid, HttpSession session){
+//        System.out.println(bid);
         Yonghu yonghu = (Yonghu) session.getAttribute("yonghu");
         Borrowingrecord borrowingrecord = new Borrowingrecord();
         borrowingrecord.setBook_id(bid);
@@ -152,7 +156,14 @@ public class BookController {
         borrowingrecord.setRe_time(new Timestamp(System.currentTimeMillis()));
         System.out.println(borrowingrecord);
         int affect = userServerImpl.reBook(borrowingrecord);
-        ArrayList<Borrowingrecord> records = userServerImpl.getRecord(yonghu.getId());
-        return records;
+        borrowingrecord = userServerImpl.getRecordByUB(borrowingrecord);
+        String time = borrowingrecord.getRe_time().toString();
+        System.out.println(time);
+        JsonObject object = new JsonObject();
+        object.addProperty("re_time",time);
+        object.addProperty("id",borrowingrecord.getId());
+        String jsonString =object.toString();
+        System.out.println(jsonString);
+        return jsonString;
     }
 }

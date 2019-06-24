@@ -112,4 +112,10 @@ public class UserServerImpl implements UserServer {
         affect = userMapper.reBooke(borrowingrecord.getAccount_id());
         return affect;
     }
+
+    @Override
+    public Borrowingrecord getRecordByUB(Borrowingrecord borrowingrecord) {
+        borrowingrecord = recordMapper.getRecordByUB(borrowingrecord);
+        return borrowingrecord;
+    }
 }
