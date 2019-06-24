@@ -23,6 +23,11 @@
         update yonghu set book_number=book_number+1 where id = #{id}
     </update>
 
+    <!--还书中的用户操作-->
+    <update id="reBooke" parameterType="string">
+        update yonghu set book_number = book_number-1 where id = #{id}
+    </update>
+
     <!--查询用户借了哪些书-->
     <select id="getBooks" parameterType="Yonghu" resultMap="Books">
         select * from yonghu where id=#{id}

@@ -83,7 +83,7 @@
 <div id="app-5" class="row">
     <div class="col-7">
         <p>欢迎 ${yonghu.name}:</p>
-        <h3>已借图书:${yonghu.book_number}</h3>
+        <h3>已借图书:{{book_number}}</h3>
         <div>
 
             <div id="have" v-if="showbooks.length === 0" >
@@ -112,7 +112,7 @@
                 <button v-on:click="b_prePage">上一页</button>
                 <span>{{b_nowPage}}</span>
                 <button v-on:click="b_nextPage">下一页</button>
-                <span>共{{b_totlePage}}</span>
+                <span>共{{b_totlePage}}页</span>
             </div>
 
 
@@ -145,7 +145,7 @@
                     <td>{{record.book.name}}</td>
                     <td>{{record.book.author}}</td>
                     <td>{{record.lend_time}}</td>
-                    <td v-if='record.re_time!=="null"' && record.re_time!==''">{{record.re_time}}</td>
+                    <td v-if='record.re_time!=="null"'>{{record.re_time}}</td>
                     <td v-else>未归还</td>
                 </tr>
                 </tbody>
@@ -155,7 +155,7 @@
                 <button v-on:click="r_prePage">上一页</button>
                 <span>{{r_nowPage}}</span>
                 <button v-on:click="r_nextPage">下一页</button>
-                <span>共{{r_totlePage}}</span>
+                <span>共{{r_totlePage}}页</span>
             </div>
 
         </div>
@@ -169,6 +169,7 @@
         el:'#app-5',
         data:{
             books:${yonghu.books},
+            book_number:${yonghu.book_number},
             records:${records},
             b_pageSize:2,
             b_totlePage:0,
@@ -187,10 +188,10 @@
             };
 
             _this.r_nowPage=1;
-            if(_this.books.length%_this.r_pageSize != 0){
-                _this.r_totlePage = parseInt(_this.books.length/_this.r_pageSize)+1;
+            if(_this.records.length%_this.r_pageSize != 0){
+                _this.r_totlePage = parseInt(_this.records.length/_this.r_pageSize)+1;
             }else {
-                _this.r_totlePage = parseInt(_this.books.length/_this.r_pageSize);
+                _this.r_totlePage = parseInt(_this.records.length/_this.r_pageSize);
             };
 
         },
@@ -252,13 +253,31 @@
                     app5.r_nowPage -= 1;
                 }
             },
+            refush:function(){
+                var _this = this;
+                _this.b_nowPage = 1;
+                if(_this.books.length%_this.b_pageSize != 0){
+                    _this.b_totlePage = parseInt(_this.books.length/_this.b_pageSize)+1;
+                }else {
+                    _this.b_totlePage = parseInt(_this.books.length/_this.b_pageSize);
+                };
+
+                _this.r_nowPage=1;
+                if(_this.records.length%_this.r_pageSize != 0){
+                    _this.r_totlePage = parseInt(_this.records.length/_this.r_pageSize)+1;
+                }else {
+                    _this.r_totlePage = parseInt(_this.records.length/_this.r_pageSize);
+                };
+            },
             huanshu: function (bid) {
+                var xinxi={bid:bid};
+                // alert(bid)
                 $.ajax({
                     type:'GET',
                     url:'huanshu',
                     dataType:'JSON',
                     timeout:20000,
-                    data:bid,
+                    data:xinxi,
                     success:function (data) {
                         for (var i=0;i<app5.books.length;i++){
                             if (app5.books[i].id==bid){
@@ -266,6 +285,8 @@
                             }
                         }
                         app5.records = data;
+                        app5.book_number -=1;
+                        app5.refush();
                         $('#success').fadeIn();
                         setTimeout(function () {
                             $('#success').fadeOut("slow");

@@ -106,8 +106,10 @@ public class UserServerImpl implements UserServer {
     @Override
     public int reBook(Borrowingrecord borrowingrecord) {
 
-        int affect = bookMapper.re(borrowingrecord.getBook_id());
+        int affect = 0;
+        affect = bookMapper.re(borrowingrecord.getBook_id());
         affect = recordMapper.reRecord(borrowingrecord);
+        affect = userMapper.reBooke(borrowingrecord.getAccount_id());
         return affect;
     }
 }

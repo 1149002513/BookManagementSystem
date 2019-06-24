@@ -13,4 +13,7 @@ public interface UserMapper {
 //    用户借书操作
     public int brrowBook(String id);
 
+//    用户还书操作
+    public int reBooke(String id);
+
 }

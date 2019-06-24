@@ -334,6 +334,7 @@
                                         // console.log(bookcontent.books[i])
                                         if (bookcontent.books[i].id==y.bid){
                                             bookcontent.books[i].uid='${yonghu.id}';
+                                            bookcontent.books[i].count += 1;
                                         }
                                     }
                                     $('#success').fadeIn();

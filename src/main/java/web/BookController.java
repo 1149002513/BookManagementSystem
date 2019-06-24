@@ -124,12 +124,16 @@ public class BookController {
 //    借书
     @RequestMapping("yuyue")
     @ResponseBody
-    public boolean yuyue(String bid,String uid){
+    public boolean yuyue(String bid,String uid,HttpSession session){
 //        System.out.println(userServerImpl.judgeTimeOut(uid));
         if (!userServerImpl.judgeTimeOut(uid)){
             return false;
         }else {
             int i = userServerImpl.borrowBook(uid,bid);
+            Yonghu yonghu = (Yonghu) session.getAttribute("yonghu");
+            yonghu = userServerImpl.getYonghu(yonghu);
+            yonghu = userServerImpl.getBooks(yonghu);
+            session.setAttribute("yonghu",yonghu);
 //            System.out.println(i);
         }
         return true;
@@ -139,13 +143,16 @@ public class BookController {
 //    还书
     @RequestMapping("huanshu")
     @ResponseBody
-    public ArrayList<Borrowingrecord> huan(String bid,String uid){
+    public ArrayList<Borrowingrecord> huanshu(String bid,HttpSession session){
+        System.out.println(bid);
+        Yonghu yonghu = (Yonghu) session.getAttribute("yonghu");
         Borrowingrecord borrowingrecord = new Borrowingrecord();
         borrowingrecord.setBook_id(bid);
-        borrowingrecord.setAccount_id(uid);
+        borrowingrecord.setAccount_id(yonghu.getId());
         borrowingrecord.setRe_time(new Timestamp(System.currentTimeMillis()));
+        System.out.println(borrowingrecord);
         int affect = userServerImpl.reBook(borrowingrecord);
-        ArrayList<Borrowingrecord> records = userServerImpl.getRecord(uid);
+        ArrayList<Borrowingrecord> records = userServerImpl.getRecord(yonghu.getId());
         return records;
     }
 }
