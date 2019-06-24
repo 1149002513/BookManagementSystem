@@ -303,7 +303,7 @@
                     timeout:20000,
                     data:xinxi,
                     success:function (data) {
-                        alert(data);
+                        // alert(data);
                         for (var i=0;i<app5.books.length;i++){
                             if (app5.books[i].id==bid){
                                 app5.books.splice(i,1)
