@@ -224,7 +224,7 @@
             <div>
                 <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
             </div>
-            <div style="float: left;">
+            <div style="float: left;width: 50%;">
                 <p>书名：{{book.name}}</p>
                 <p>作者：{{book.author}}</p>
                 <p>价格：{{book.price}}</p>
@@ -232,7 +232,7 @@
                 <p>所在位置:{{book.location}}</p>
             </div>
 
-            <div v-if="book.uid === '0'" style="margin-right: 10px; float: right;">
+            <div v-if="book.uid === '0'" style="margin-right: 10px; float: right; width: 40%;">
                 <img src="/ht/xitongpic/book.png"  v-on:click="yuyue(book.id)"  style="width: 50px; height: 50px;margin-left:30%;margin-top:30%;" data-toggle="tooltip" data-placement="top" title="预约借书">
             </div>
 
