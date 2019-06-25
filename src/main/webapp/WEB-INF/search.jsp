@@ -33,7 +33,7 @@
 
         .book{
             float: left;
-            margin-left: 2%;
+            margin-left: 4%;
             margin-top: 1%;
             border: rgba(216,221,216,0.73) 1px dotted;
             border-radius: 10px;
@@ -218,9 +218,9 @@
             <button type="submit" class="btn btn-primary" style="height: 4%;width: 6%;margin-left: 2%;" onclick="searchnew();">搜索</button>
         </div>
 
-    <div id="books"  class="bookcontent" style="height: auto;">
+    <div id="books"  class="bookcontent" style="height: auto;text-align: center;">
         <div v-for="book in showbooks" class="book">
-            <div>
+            <div style="width: 20%;height: 300px;">
                 <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
             </div>
             <div style="float: left;">
