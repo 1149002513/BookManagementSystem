@@ -25,7 +25,7 @@
             margin-top: 2%;
             margin-left: 2%;
         }
-        #success{
+        #success ,#nextwarn ,#prewarn{
             display: none;
             position: absolute;
             left: 30%;
@@ -33,11 +33,20 @@
             width: 200px;
             height: 50px;
             text-align: center;
+            z-index: 999;
         }
     </style>
 
 </head>
 <body>
+
+<div id="nextwarn" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>最后一页了！</strong>
+</div>
+
+<div id="prewarn" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>前面没有了！</strong>
+</div>
 
 <div id="success" class="alert alert-success" role="alert">
     还书成功！
@@ -108,10 +117,10 @@
 
             <div style="clear: both"></div>
 
-            <div>
-                <button v-on:click="b_prePage">上一页</button>
+            <div style="text-align: center;margin-top: 3px;">
+                <button class="btn btn-outline-info" v-on:click="b_prePage">上一页</button>
                 <span>{{b_nowPage}}</span>
-                <button v-on:click="b_nextPage">下一页</button>
+                <button class="btn btn-outline-info" v-on:click="b_nextPage">下一页</button>
                 <span>共{{b_totlePage}}页</span>
             </div>
 
@@ -151,10 +160,10 @@
                 </tbody>
             </table>
 
-            <div>
-                <button v-on:click="r_prePage">上一页</button>
+            <div style="text-align: center;margin-top: 3px;">
+                <button class="btn btn-outline-success" v-on:click="r_prePage">上一页</button>
                 <span>{{r_nowPage}}</span>
-                <button v-on:click="r_nextPage">下一页</button>
+                <button class="btn btn-outline-success" v-on:click="r_nextPage">下一页</button>
                 <span>共{{r_totlePage}}页</span>
             </div>
 
@@ -250,28 +259,40 @@
         methods: {
             b_nextPage: function () {
                 if (app5.b_nowPage + 1 > app5.b_totlePage) {
-                    alert("最后一页了");
+                    $('#nextwarn').fadeIn();
+                    setTimeout(function () {
+                        $('#nextwarn').fadeOut("slow");
+                    },1000);
                 } else {
                     app5.b_nowPage += 1;
                 }
             },
             b_prePage: function () {
                 if (app5.b_nowPage - 1 < 1) {
-                    alert("前面没有了");
+                    $('#prewarn').fadeIn();
+                    setTimeout(function () {
+                        $('#prewarn').fadeOut("slow");
+                    },1000);
                 } else {
                     app5.b_nowPage -= 1;
                 }
             },
             r_nextPage: function () {
                 if (app5.r_nowPage + 1 > app5.r_totlePage) {
-                    alert("最后一页了");
+                    $('#nextwarn').fadeIn();
+                    setTimeout(function () {
+                        $('#nextwarn').fadeOut("slow");
+                    },1000);
                 } else {
                     app5.r_nowPage += 1;
                 }
             },
             r_prePage: function () {
                 if (app5.r_nowPage - 1 < 1) {
-                    alert("前面没有了");
+                    $('#prewarn').fadeIn();
+                    setTimeout(function () {
+                        $('#prewarn').fadeOut("slow");
+                    },1000);
                 } else {
                     app5.r_nowPage -= 1;
                 }

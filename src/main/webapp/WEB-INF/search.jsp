@@ -65,7 +65,7 @@
             height: 50px;
             text-align: center;
         }
-        #false{
+        #false ,#nextwarn ,#prewarn{
             display: none;
             position: absolute;
             left: 30%;
@@ -85,6 +85,14 @@
 
 <div id="warn" class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>请先登录！</strong>
+</div>
+
+<div id="nextwarn" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>最后一页了！</strong>
+</div>
+
+<div id="prewarn" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>前面没有了！</strong>
 </div>
 
 <div id="titp" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -286,14 +294,20 @@
         methods:{
             nextPage:function () {
                 if (bookcontent.nowPage+1 > bookcontent.totlePage){
-                    alert("最后一页了");
+                    $('#nextwarn').fadeIn();
+                    setTimeout(function () {
+                        $('#nextwarn').fadeOut("slow");
+                    },1000);
                 } else {
                     bookcontent.nowPage += 1;
                 }
             },
             prePage:function () {
                 if (bookcontent.nowPage-1<1){
-                    alert("前面没有了");
+                    $('#prewarn').fadeIn();
+                    setTimeout(function () {
+                        $('#prewarn').fadeOut("slow");
+                    },1000);
                 } else {
                     bookcontent.nowPage -= 1;
                 }

@@ -59,6 +59,9 @@ public class BookController {
     @RequestMapping("mymain")
     public String mymain(Model model,HttpSession session){
         Yonghu yonghu = (Yonghu) session.getAttribute("yonghu");
+        yonghu = userServerImpl.getYonghu(yonghu);
+        yonghu = userServerImpl.getBooks(yonghu);
+        session.setAttribute("yonghu",yonghu);
         ArrayList<Borrowingrecord> records = userServerImpl.getRecord(yonghu.getId());
         model.addAttribute("records",records);
         return "mymain";
@@ -150,12 +153,16 @@ public class BookController {
     public String huanshu(String bid, HttpSession session){
 //        System.out.println(bid);
         Yonghu yonghu = (Yonghu) session.getAttribute("yonghu");
+
         Borrowingrecord borrowingrecord = new Borrowingrecord();
         borrowingrecord.setBook_id(bid);
         borrowingrecord.setAccount_id(yonghu.getId());
         borrowingrecord.setRe_time(new Timestamp(System.currentTimeMillis()));
-        System.out.println(borrowingrecord);
+
+//        System.out.println(borrowingrecord);
+
         int affect = userServerImpl.reBook(borrowingrecord);
+
         borrowingrecord = userServerImpl.getRecordByUB(borrowingrecord);
         String time = borrowingrecord.getRe_time().toString();
         System.out.println(time);
