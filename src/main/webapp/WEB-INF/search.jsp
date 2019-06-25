@@ -37,6 +37,8 @@
             margin-top: 1%;
             border: rgba(216,221,216,0.73) 1px dotted;
             border-radius: 10px;
+            width: 15%;
+            height: 300px;
         }
         #warn{
             display: none;
@@ -220,7 +222,7 @@
 
     <div id="books"  class="bookcontent" style="height: auto;text-align: center;">
         <div v-for="book in showbooks" class="book">
-            <div style="width: 20%;height: 300px;">
+            <div>
                 <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
             </div>
             <div style="float: left;">
