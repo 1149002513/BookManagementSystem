@@ -38,7 +38,6 @@
             border: rgba(216,221,216,0.73) 1px dotted;
             border-radius: 10px;
             width: 15%;
-            height: 300px;
         }
         #warn{
             display: none;
