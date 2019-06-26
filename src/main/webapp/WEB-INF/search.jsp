@@ -224,12 +224,12 @@
             <div>
                 <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
             </div>
-            <div style="float: left;width: 50%;">
-                <p>书名：{{book.name}}</p>
-                <p>作者：{{book.author}}</p>
-                <p>价格：{{book.price}}</p>
-                <p>被借次数：{{book.count}}</p>
-                <p>所在位置:{{book.location}}</p>
+            <div style="float: left;width: 50%;overflow: hidden;">
+                <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.name">书名：{{book.name}}</p>
+                <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.author">作者：{{book.author}}</p>
+                <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.price">价格：{{book.price}}</p>
+                <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.count">被借次数：{{book.count}}</p>
+                <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.localtion">所在位置:{{book.location}}</p>
             </div>
 
             <div v-if="book.uid === '0'" style="margin-right: 10px; float: right; width: 40%;">
