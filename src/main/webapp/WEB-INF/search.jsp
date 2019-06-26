@@ -219,7 +219,7 @@
             <button type="submit" class="btn btn-primary" style="height: 4%;width: 6%;margin-left: 2%;" onclick="searchnew();">搜索</button>
         </div>
 
-    <div id="books"  class="bookcontent" style="height: auto;text-align: center;">
+    <div id="books"  class="bookcontent" style="height: auto;">
         <div v-for="book in showbooks" class="book">
             <div>
                 <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
