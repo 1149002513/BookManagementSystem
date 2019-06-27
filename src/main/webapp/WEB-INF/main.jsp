@@ -211,7 +211,7 @@
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="width: 100%;">
-    <a class="navbar-brand" href="/main" style="font-size: 30px;">xx图书馆</a>
+    <a class="navbar-brand" href="/main" style="font-size: 30px;">一纸图书馆</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -234,6 +234,14 @@
                 </c:choose>
             </li>
 
+            <c:choose>
+                <c:when test="${yonghu.id ne '0' && yonghu.id ne null}">
+                    <li class="nav-item" style="margin-right: 10px;">
+                        <a class="nav-link" href="exit" style="font-size: 15px;">退出登录</a>
+                    </li>
+                </c:when>
+            </c:choose>
+
             <li class="nav-item" style="margin-right: 10px;">
                 <a class="nav-link" href="#" style="color: #ffffff;font-size: 15px;">联系我们</a>
             </li>
@@ -242,6 +250,8 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-success my-2" type="submit">Search</button>
             </form>
+
+
 
         </ul>
     </div>

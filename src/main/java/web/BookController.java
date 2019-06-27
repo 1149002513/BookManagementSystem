@@ -56,6 +56,13 @@ public class BookController {
         return "error";
     }
 
+    @RequestMapping("exit")
+    public String exit(HttpSession session,Yonghu yonghu,Model model){
+        session.invalidate();
+        model.addAttribute("yonghu",yonghu);
+        return "main";
+    }
+
     @RequestMapping("mymain")
     public String mymain(Model model,HttpSession session){
         Yonghu yonghu = (Yonghu) session.getAttribute("yonghu");
@@ -127,7 +134,7 @@ public class BookController {
 //    借书
     @RequestMapping("yuyue")
     @ResponseBody
-    public boolean yuyue(String bid,String uid,HttpSession session){
+    public boolean yuyue(String bid,String uid,HttpSession session,Model model){
 //        System.out.println(userServerImpl.judgeTimeOut(uid));
         if (!userServerImpl.judgeTimeOut(uid)){
             return false;
@@ -140,7 +147,7 @@ public class BookController {
                 yonghu = userServerImpl.getYonghu(yonghu);
                 yonghu = userServerImpl.getBooks(yonghu);
                 session.setAttribute("yonghu",yonghu);
-//            System.out.println(i);
+//                System.out.println(yonghu.getBook_number());
             }
         }
         return true;
@@ -161,9 +168,16 @@ public class BookController {
 
 //        System.out.println(borrowingrecord);
 
+//        更新数据库
         int affect = userServerImpl.reBook(borrowingrecord);
-
         borrowingrecord = userServerImpl.getRecordByUB(borrowingrecord);
+
+//        更新session中的用户
+        yonghu = userServerImpl.getYonghu(yonghu);
+        yonghu = userServerImpl.getBooks(yonghu);
+        session.setAttribute("yonghu",yonghu);
+
+
         String time = borrowingrecord.getRe_time().toString();
         System.out.println(time);
         JsonObject object = new JsonObject();

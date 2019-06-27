@@ -93,15 +93,15 @@ public class Yonghu {
 
     @Override
     public String toString() {
-        return "Yonghu{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", book_number=" + book_number +
-                ", limit_y=" + limit_y +
-                ", active=" + active +
-                ", books=" + books +
+        return "{" +
+                "id:'" + id + '\'' +
+                ", name:'" + name + '\'' +
+                ", password:'" + password + '\'' +
+                ", avatar:'" + avatar + '\'' +
+                ", book_number:" + book_number +
+                ", limit_y:" + limit_y +
+                ", active:" + active +
+                ", books:" + books +
                 '}';
     }
 }

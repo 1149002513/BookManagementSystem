@@ -53,7 +53,7 @@
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="width: 100%;">
-    <a class="navbar-brand" href="/main" style="font-size: 30px;">xx图书馆</a>
+    <a class="navbar-brand" href="/main" style="font-size: 30px;">一纸图书馆</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -76,6 +76,14 @@
                 </c:choose>
             </li>
 
+            <c:choose>
+                <c:when test="${yonghu.id ne '0' && yonghu.id ne null}">
+                    <li class="nav-item" style="margin-right: 10px;">
+                        <a class="nav-link" href="exit" style="font-size: 15px;">退出登录</a>
+                    </li>
+                </c:when>
+            </c:choose>
+
             <li class="nav-item" style="margin-right: 10px;">
                 <a class="nav-link" href="#" style="font-size: 15px;">联系我们</a>
             </li>
@@ -84,6 +92,8 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-success my-2" type="submit">Search</button>
             </form>
+
+
 
         </ul>
     </div>
@@ -100,17 +110,18 @@
                 <img src="/ht/xitongpic/mymianbook.jpg">
             </div>
 
-            <div id="no" v-else v-for="book in showbooks" class="text-center" style="margin-right: 10px;float: left;border: rgba(127,129,123,0.73) 2px solid; border-radius: 10px;">
+            <div id="no" v-else v-for="book in showbooks" style="margin-right: 10px;float: left;border: rgba(127,129,123,0.73) 2px solid; border-radius: 10px;">
                 <div>
                     <img v-bind:src="book.cover" v-bind:alt="book.name的封面" class="img-thumbnail" style="width: 200px;height: 300px;">
                 </div>
-                <div style="float: left">
-                    <p>书名：{{book.name}}</p>
-                    <p>作者：{{book.author}}</p>
-                    <p>价格：{{book.price}}</p>
-                    <p>被借次数：{{book.count}}</p>
+                <div style="float: left;width: 50%;overflow: hidden;">
+                    <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.name">书名：{{book.name}}</p>
+                    <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.author">作者：{{book.author}}</p>
+                    <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.price">价格：{{book.price}}</p>
+                    <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.count">被借次数：{{book.count}}</p>
+                    <p style="width: 100%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" data-toggle="tooltip" data-placement="top" v-bind:title="book.localtion">所在位置:{{book.location}}</p>
                 </div>
-                <div style="margin-top: 20%;">
+                <div style="margin-right: 10px; float: right; width: 40%;">
                     <img v-on:click="huanshu(book.id)" src="/ht/xitongpic/huan.png" style="width: 40px; height: 40px;" data-toggle="tooltip" data-placement="top" title="还书">
                 </div>
             </div>

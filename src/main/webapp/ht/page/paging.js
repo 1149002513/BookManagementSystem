@@ -99,7 +99,7 @@
             jumpBtn.on('click', function() {
                 var jumpNum = parseInt(jumpText.val().replace(/\D/g, ''));
                 if (jumpNum && jumpNum >= 1 && jumpNum <= totalPages) {
-                    // bookcontent.nowPage = jumpNum;
+                    bookcontent.nowPage = jumpNum;
                     pageIndex = jumpNum;
                     handles(pageIndex);
                     jumpText.val(jumpNum);
@@ -110,7 +110,7 @@
             })
 
             lis.on('click', function() {
-                // bookcontent.nowPage = $(this).index() + 1;
+                bookcontent.nowPage = $(this).index() + 1;
                 pageIndex = $(this).index() + 1;
                 handles(pageIndex);
             })

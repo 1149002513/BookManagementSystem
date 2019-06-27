@@ -52,9 +52,9 @@
             background: url("/ht/xitongpic/rs2.jpg");
             background: url("/ht/xitongpic/rs1.jpg");
             background-size: 100% 100%;
-            -webkit-animation: bj 10s ease-out;
-            -moz-animation: bj 10s ease-out;
-            animation: bj 10s ease-out;
+            -webkit-animation: bj 20s ease-out;
+            -moz-animation: bj 20s ease-out;
+            animation: bj 20s ease-out;
             -webkit-animation-iteration-count: infinite;
             -moz-animation-iteration-count: infinite;
             animation-iteration-count: infinite;
